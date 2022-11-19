@@ -8,13 +8,13 @@ import Simulation from "./Screens/Simulation";
 import Chart from "./Screens/Chart";
 
 // importing config requirements
-import {developmentSocket} from "./config/config"
+import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
 
 export default function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(developmentSocket, {transports : ['websocket']});
+  const socket = io.connect(productionSocket, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
 
