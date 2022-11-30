@@ -5,7 +5,8 @@ import { useEffect } from "react";
 // importing screens
 import LandingPage from "./Screens/LandingPage";
 import Simulation from "./Screens/Simulation";
-import Chart from "./Screens/Chart";
+import AdminScreen from "./Screens/AdminScreen";
+import ChartScreen from "./Screens/Chart";
 
 // importing config requirements
 import {developmentSocket, productionSocket} from "./config/config"
@@ -14,12 +15,15 @@ import { useState } from "react";
 export default function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(developmentSocket, {transports : ['websocket']});
+  const socket = io.connect(productionSocket, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
+  const [currentChoice, setCurrentChoice] = useState();
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
+      console.log("recieved new data");
+      console.log(data);
       setCareerData(data);
     })
   }, [socket, careerData])
@@ -33,11 +37,28 @@ export default function App(){
     setUserData(data)
   };
 
-  function handleChoiceChange(currentChoice){
-    // current choice is a value from 1 to 4.
-    console.log("handle choice change");
-    socket.emit("choiceChange", currentChoice);
+  function handleNewChoice(userChoice){
+
+    let choiceData = {};
+
+    if(currentChoice){
+      choiceData["add"] = userChoice;
+      choiceData["subtract"] = currentChoice; 
+      setCurrentChoice(userChoice);
+    }
+    else{
+      choiceData["add"] = userChoice;
+      setCurrentChoice(userChoice);
+    }
+
+    return choiceData;
   }
+
+  function handleChoiceChange(userChoice){
+    // current choice is a value from 1 to 4.
+    let dataToSend = handleNewChoice(userChoice);
+    socket.emit("choiceChange", dataToSend);
+  };
 
 
 
@@ -45,8 +66,9 @@ export default function App(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage socket={socket} storeData={handleUserData} />} />
-        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange}  />} />
-        <Route path="/chart" element={<Chart />} />
+        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
+        <Route path="/chart" element={<ChartScreen />} />
+        <Route path="/admin" element={<AdminScreen />} />
       </Routes>
     </BrowserRouter>
   )

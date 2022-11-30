@@ -2,7 +2,7 @@ import CareerCard from "../components/CareerCard";
 import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
 
-function Simulation({socket, choiceHandler, userData, careerData}){
+function Simulation({socket, choiceHandler, userData, careerData, currentChoice}){
     const navigate = useNavigate();
     const choices = [
         {
@@ -25,7 +25,6 @@ function Simulation({socket, choiceHandler, userData, careerData}){
 
     function onChangeChoice(currentChoice){
         // the current choice reflects back the choice that they have made
-        console.log("on change choice");
         choiceHandler(currentChoice);;
     }
 
@@ -48,10 +47,10 @@ function Simulation({socket, choiceHandler, userData, careerData}){
                         <h1>Pick a career</h1>
                     </div>
                     <div className="choices">
-                        <CareerCard key={choices[0].id} name={choices[0].name} id={choices[0].id} changeChoice={onChangeChoice} numberOfPeople={careerData[1]}  />
-                        <CareerCard key={choices[1].id} name={choices[1].name} id={choices[1].id} changeChoice={onChangeChoice} numberOfPeople={careerData[2]}  />
-                        <CareerCard key={choices[2].id} name={choices[2].name} id={choices[2].id} changeChoice={onChangeChoice} numberOfPeople={careerData[3]}  />
-                        <CareerCard key={choices[3].id} name={choices[3].name} id={choices[3].id} changeChoice={onChangeChoice} numberOfPeople={careerData[4]}  />
+                        <CareerCard key={choices[0].id} name={choices[0].name} id={choices[0].id} changeChoice={onChangeChoice} numberOfPeople={careerData[1]} currentChoice={currentChoice}  />
+                        <CareerCard key={choices[1].id} name={choices[1].name} id={choices[1].id} changeChoice={onChangeChoice} numberOfPeople={careerData[2]} currentChoice={currentChoice}  />
+                        <CareerCard key={choices[2].id} name={choices[2].name} id={choices[2].id} changeChoice={onChangeChoice} numberOfPeople={careerData[3]} currentChoice={currentChoice} />
+                        <CareerCard key={choices[3].id} name={choices[3].name} id={choices[3].id} changeChoice={onChangeChoice} numberOfPeople={careerData[4]} currentChoice={currentChoice} />
                     </div> 
                 </div>
                  

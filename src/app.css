@@ -117,6 +117,10 @@
     width: 75%;
 }
 
+button .disabled {
+    color: green;
+}
+
 .career-card button:hover{
     background-color: var(--blue-color);
     color: var(--light-color);
