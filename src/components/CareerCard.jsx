@@ -20,9 +20,9 @@ function CareerCard({name,id, changeChoice, numberOfPeople}){
 
     return(
         <div className="career-card">
-            <code>{id}</code>
-            <h3>{name}</h3>
-            <p>{numberOfPeople ? `${numberOfPeople} have chosen this` : "No one has chosen this yet"}</p>
+            {/* <code>{id}</code> */}
+            <h2>{name}</h2>
+            <p>{numberOfPeople ? `${numberOfPeople} have chosen this` : "0 have chosen this"}</p>
             <button onClick={() => choiceHandler(id)}>Choose Career</button>
         </div>
     )

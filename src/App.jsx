@@ -14,7 +14,7 @@ import { useState } from "react";
 export default function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(productionSocket, {transports : ['websocket']});
+  const socket = io.connect(developmentSocket, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
 
