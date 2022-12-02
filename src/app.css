@@ -125,3 +125,12 @@ button .disabled {
     background-color: var(--blue-color);
     color: var(--light-color);
 }
+
+
+/* admin screen */
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1.1rem;
+    padding: 25px 10px;
+}

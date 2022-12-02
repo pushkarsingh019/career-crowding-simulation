@@ -1,6 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import io from "socket.io-client";
 import { useEffect } from "react";
+import axios from "axios"
 
 // importing screens
 import LandingPage from "./Screens/LandingPage";
@@ -14,11 +15,13 @@ import { useState } from "react";
 
 export default function App(){
 
+  const origin = developmentSocket;
   // setting up socket.io-client
-  const socket = io.connect(productionSocket, {transports : ['websocket']});
+  const socket = io.connect(origin, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
+  const [roundNumber, setRoundNumber] = useState(0);
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -60,6 +63,20 @@ export default function App(){
     socket.emit("choiceChange", dataToSend);
   };
 
+  async function submitChoiceHandler(submit){
+    if(submit){
+      await axios.post(`${origin}`, {roundNumber : roundNumber});
+    }
+    setRoundNumber(roundNumber + 1);
+  };
+
+  async function clearDatabaseHandler(shouldDelete){
+    if(shouldDelete){
+      await axios.delete(`${origin}`);
+    }
+    setRoundNumber(0);
+  }
+
 
 
   return(
@@ -68,7 +85,7 @@ export default function App(){
         <Route path="/" element={<LandingPage socket={socket} storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
         <Route path="/chart" element={<ChartScreen />} />
-        <Route path="/admin" element={<AdminScreen />} />
+        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
       </Routes>
     </BrowserRouter>
   )
