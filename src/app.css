@@ -134,3 +134,9 @@ button .disabled {
     column-gap: 1.1rem;
     padding: 25px 10px;
 }
+
+
+/* chart page */
+canvas {
+    width: 50%;
+}

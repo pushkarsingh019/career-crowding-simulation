@@ -13,22 +13,23 @@ import ChartScreen from "./Screens/Chart";
 import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
 
-export default function App(){
+export const origin = developmentSocket
 
-  const origin = developmentSocket;
+function App(){
+
+  console.log(productionSocket)
   // setting up socket.io-client
   const socket = io.connect(origin, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
   const [roundNumber, setRoundNumber] = useState(0);
+  const [currentChart, setCurrentChart] = useState()
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
-      console.log("recieved new data");
-      console.log(data);
       setCareerData(data);
-    })
+    });
   }, [socket, careerData])
 
   socket.on("connect", () => {
@@ -36,6 +37,11 @@ export default function App(){
   })
 
   // reducers
+
+  // async function getChartData(){
+  //   let {data} = await axios.get(`${origin}`);
+  // }
+
   function handleUserData(data){
     setUserData(data)
   };
@@ -75,18 +81,23 @@ export default function App(){
       await axios.delete(`${origin}`);
     }
     setRoundNumber(0);
+  };
+
+  async function fetchChartHandler(roundNumber){
+    let {data} = await axios.get(`${origin}chart/${roundNumber}`);
+    setCurrentChart(data.data);
   }
-
-
 
   return(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage socket={socket} storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
-        <Route path="/chart" element={<ChartScreen />} />
+        <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} /> } />
         <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
       </Routes>
     </BrowserRouter>
   )
-}
+};
+
+export default App;

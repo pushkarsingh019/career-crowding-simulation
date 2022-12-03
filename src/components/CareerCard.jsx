@@ -25,7 +25,7 @@ function CareerCard({name,id, changeChoice, numberOfPeople, currentChoice}){
             {/* <code>{id}</code> */}
             <h2>{name}</h2>
             <p>{numberOfPeople ? `${numberOfPeople} have chosen this` : "0 have chosen this"}</p>
-            <button className={currentChoice === id ? "disabled" : "button"} onClick={() => {
+        <button className={currentChoice === id ? "disabled" : "button"} onClick={() => {
                 if(currentChoice !== id){
                     choiceHandler(id)
                 }
