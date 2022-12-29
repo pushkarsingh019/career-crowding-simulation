@@ -86,7 +86,7 @@ function App(){
     if(shouldDelete){
       await axios.delete(`${origin}`);
     }
-    setRoundNumber(0);
+    setRoundNumber(1);
   };
 
   async function fetchChartHandler(roundNumber){

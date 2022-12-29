@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import ChartScreen from "./Chart";
 // import ChartScreen from "./Chart";
 // main functions of the admin screen
 /* 
@@ -46,23 +45,6 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
                 <button style={buttonStyle}  onClick={clickHandler}>Submit</button>
                 <button onClick={deleteHandler}>Clear Database</button>
             </div>
-            <ChartScreen />
-            {/* <div className="admin-grid">
-                <div className="create-room-form">
-                    <form>
-                        <h3>Create A Room</h3>
-                        <input type="text" placeholder="Room Number" />
-                        <br />
-                        <button type="submit">Create Room</button>
-                    </form>
-                </div>
-                <div>
-                    <h3>The Timer Section</h3>
-                </div>
-                <div>
-                    <h3>Users in the room</h3>
-                </div>
-            </div> */}
         </div>
     )
 };

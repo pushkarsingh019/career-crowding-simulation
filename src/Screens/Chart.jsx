@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {origin} from "../App";
 import { Bar } from "react-chartjs-2"
+import Navbar from "../components/Navbar"
 
 import {
     Chart as ChartJS,
@@ -14,7 +15,7 @@ import {
   } from "chart.js";
 
 function ChartScreen({onFetch, currentChart}){
-    const [chartData, setChartData] = useState([]);
+    const [chartData, setChartData] = useState();
     useEffect( () => {
         async function fetchData(){
             let {data} = await axios.get(`${origin}`);
@@ -24,6 +25,7 @@ function ChartScreen({onFetch, currentChart}){
     }, [chartData])
 
     function clickHandler(roundNumber){
+        console.log("clickhandler round Number -> " + roundNumber)
         onFetch(roundNumber)
     };
 
@@ -70,14 +72,14 @@ function ChartScreen({onFetch, currentChart}){
 
     return(
         <div className="screen chart-screen">
-            {/* <Navbar navbarText={`Charts`} /> */}
-            <h3>Charts</h3>
+            <Navbar navbarText={`Chart Screen`} />
+            <br />
             {chartData ? chartData.map((chart) => {
                 return(
                     <button onClick={() => clickHandler(chart.round )} key={chart._id}>Round {chart.round}</button>
                 )
-            }) : "Chart Data does not exist" }
-            {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : "Select Which rounds chart to display"}
+            }) : <code>chart data does not exist</code> }
+            {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
         </div>
     )
         }
