@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import {origin} from "../App";
 import { Bar } from "react-chartjs-2"
 
@@ -71,7 +70,8 @@ function ChartScreen({onFetch, currentChart}){
 
     return(
         <div className="screen chart-screen">
-            <Navbar navbarText={`Charts`} />
+            {/* <Navbar navbarText={`Charts`} /> */}
+            <h3>Charts</h3>
             {chartData ? chartData.map((chart) => {
                 return(
                     <button onClick={() => clickHandler(chart.round )} key={chart._id}>Round {chart.round}</button>

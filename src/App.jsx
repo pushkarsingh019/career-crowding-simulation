@@ -23,8 +23,9 @@ function App(){
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
-  const [roundNumber, setRoundNumber] = useState(0);
-  const [currentChart, setCurrentChart] = useState()
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [currentChart, setCurrentChart] = useState();
+  const [choicesData, setChoicesData] = useState();
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -32,15 +33,20 @@ function App(){
     });
   }, [socket, careerData])
 
+  useEffect(() => {
+    async function getChartData(){
+      let {data} = await axios.get(`${origin}`);
+      setChoicesData(data.data)
+    }
+    getChartData();
+  }, [])
+
   socket.on("connect", () => {
     console.log("client connected");
   })
 
   // reducers
 
-  // async function getChartData(){
-  //   let {data} = await axios.get(`${origin}`);
-  // }
 
   function handleUserData(data){
     setUserData(data)
@@ -93,7 +99,7 @@ function App(){
       <Routes>
         <Route path="/" element={<LandingPage socket={socket} storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
-        <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} /> } />
+        <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
         <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
       </Routes>
     </BrowserRouter>
