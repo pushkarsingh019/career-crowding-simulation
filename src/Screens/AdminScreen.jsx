@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import HeroText from "../components/HeroText";
 // import ChartScreen from "./Chart";
 // main functions of the admin screen
 /* 
@@ -36,7 +37,8 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
 
     return(
         <div className="screen">
-            <Navbar navbarText={`The Admin Screen`} />
+            <Navbar />
+            <HeroText heroText={`The Admin Screen`} />
             <div className="admin-hero">
                 <code>Round Number : {roundNumber}</code>
                 <br />

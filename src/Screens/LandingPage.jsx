@@ -2,6 +2,7 @@ import { useState } from "react";
 import {useNavigate} from "react-router-dom"
 
 import Navbar from "../components/Navbar";
+import HeroText from "../components/HeroText";
 
 function LandingPage({socket, storeData}){
 
@@ -25,7 +26,8 @@ function LandingPage({socket, storeData}){
 
     return(
         <div className="screen landing-screen">
-            <Navbar navbarText={`Enter your details to get started`} />
+            <Navbar />
+            <HeroText heroText={`Enter your details to get started`} />
             <form onSubmit={formHandler} className="form">
                 <input required type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username || ""} />
                 <br />

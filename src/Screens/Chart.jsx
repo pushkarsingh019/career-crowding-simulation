@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {origin} from "../App";
 import { Bar } from "react-chartjs-2"
 import Navbar from "../components/Navbar"
+import HeroText from "../components/HeroText";
 
 import {
     Chart as ChartJS,
@@ -72,7 +73,8 @@ function ChartScreen({onFetch, currentChart}){
 
     return(
         <div className="screen chart-screen">
-            <Navbar navbarText={`Chart Screen`} />
+            <Navbar />
+            <HeroText heroText={`Chart Screen`} />
             <br />
             {chartData ? chartData.map((chart) => {
                 return(

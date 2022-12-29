@@ -1,6 +1,7 @@
 import CareerCard from "../components/CareerCard";
 import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
+import HeroText from "../components/HeroText";
 
 function Simulation({socket, choiceHandler, userData, careerData, currentChoice}){
     const navigate = useNavigate();
@@ -31,7 +32,8 @@ function Simulation({socket, choiceHandler, userData, careerData, currentChoice}
 
     return(
         <section className="screen">
-            <Navbar navbarText={`Simulation Screen`} />
+            <Navbar />
+            <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
                 <div>
                     <code>You need to join a room before coming to the simulation room</code>

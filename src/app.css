@@ -9,9 +9,42 @@
 
 :root {
     --primary-color : #06283D;
-    --light-color : #F3EFE0;
+    --light-color : #ccfbf1;
     --dark-text-color : #222222;
     --blue-color : #2146C7;
+}
+
+/* navbar section */
+.navbar {
+    padding: 1.2rem 3rem;
+    background-color: var(--light-color);
+}
+
+.nav-list {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.1rem;
+    align-content: center;
+}
+
+.nav-list li {
+    list-style: none;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.nav-list li .link {
+    color: var(--dark-text-color);
+    text-decoration: none;
+}
+
+.nav-list li .link:hover {
+    text-decoration: underline;
+}
+
+.hero-text {
+    margin-top: 3rem;
+    font-size: 2rem;
 }
 
 /* styling a whole screen */
@@ -19,14 +52,6 @@
     margin: 0;
     /* padding: 10px 25px; */
     text-align: center;
-}
-
-.navbar {
-    background-color: var(--light-color);
-    color: var(--dark-text-color);
-    font-weight: 600;
-    padding: 10px 12px;
-    font-size: 1.5rem;
 }
 
 .landing-grid {
