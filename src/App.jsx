@@ -8,6 +8,7 @@ import LandingPage from "./Screens/LandingPage";
 import Simulation from "./Screens/Simulation";
 import AdminScreen from "./Screens/AdminScreen";
 import ChartScreen from "./Screens/Chart";
+import ErrorPage from "./Screens/ErrorPage";
 
 // importing onboarding screens
 import ChooseScreen from "./Screens/onboarding/ChooseScreen";
@@ -101,6 +102,7 @@ function App(){
   return(
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage storeData={handleUserData} />} />  
         <Route path="/:roomName" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
@@ -108,6 +110,7 @@ function App(){
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen />} />
         <Route path="/explanation/:role" element={<GameExplantion />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   )
