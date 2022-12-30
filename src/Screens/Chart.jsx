@@ -78,7 +78,7 @@ function ChartScreen({onFetch, currentChart}){
             <br />
             {chartData ? chartData.map((chart) => {
                 return(
-                    <button onClick={() => clickHandler(chart.round )} key={chart._id}>Round {chart.round}</button>
+                    <button className="btn options margin-left" onClick={() => clickHandler(chart.round )} key={chart._id}>Round {chart.round}</button>
                 )
             }) : <code>chart data does not exist</code> }
             {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}

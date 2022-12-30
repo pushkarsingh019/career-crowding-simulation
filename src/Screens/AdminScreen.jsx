@@ -26,15 +26,6 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
         onDelete(true)
     }
 
-    const buttonStyle = {
-        padding : "5px 8px",
-        backgroundColor : "white",
-        border : "2px solid blue",
-        color : "blue",
-        borderRadius : "12px"
-    }
-
-
     return(
         <div className="screen">
             <Navbar />
@@ -44,8 +35,8 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
                 <br />
                 <code>Click the submit button to end one round and clear database to end the entire simulation</code>
                 <br />
-                <button style={buttonStyle}  onClick={clickHandler}>Submit</button>
-                <button onClick={deleteHandler}>Clear Database</button>
+                <button className="primary-button btn" onClick={clickHandler}>Submit</button>
+                <button className="secondary-button btn margin-left" onClick={deleteHandler}>End Simulation</button>
             </div>
         </div>
     )

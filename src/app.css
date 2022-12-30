@@ -12,6 +12,46 @@
     --light-color : #ccfbf1;
     --dark-text-color : #222222;
     --blue-color : #2146C7;
+    --light-blue : #ecfeff;
+}
+
+/* button element */
+.btn {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 12px;
+}
+
+.primary-button {
+    background-color: var(--dark-text-color);
+    color: white;
+    border: 1px solid var(--dark-text-color);
+}
+
+.secondary-button {
+    background-color: white;
+    color: var(--blue-color);
+}
+
+.primary-button:hover{
+    background-color: var(--dark-text-color);
+    color: var(--light-blue);
+    border: 1px solid var(--dark-text-color);
+}
+
+.secondary-button:hover{
+    background-color: var(--blue-color);
+    color: white;
+}
+
+.margin-left {
+    margin-left: 2rem;
+}
+
+.options {
+    background-color: #fecaca;
+    color: var(--dark-text-color);
+    border: none;
 }
 
 /* navbar section */

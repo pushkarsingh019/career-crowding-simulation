@@ -37,7 +37,7 @@ function LandingPage({storeData}){
                 <br />
                 {/* <input required type="Number" placeholder="Enter Simulation Number" onChange={(e) => setSimulation(e.target.value)} value={simulaton || ""} /> */}
                 <br />
-                <button className="button-cta" type="submit">Join Room</button>
+                <button className="btn primary-button" type="submit">Join Room</button>
             </form>
             </div>
     )
