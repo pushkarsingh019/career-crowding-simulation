@@ -9,6 +9,10 @@ import Simulation from "./Screens/Simulation";
 import AdminScreen from "./Screens/AdminScreen";
 import ChartScreen from "./Screens/Chart";
 
+// importing onboarding screens
+import ChooseScreen from "./Screens/onboarding/ChooseScreen";
+import GameExplantion from "./Screens/onboarding/GameExplanation";
+
 // importing config requirements
 import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
@@ -101,6 +105,9 @@ function App(){
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
         <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
+        <Route path="/choice" element={<ChooseScreen />} />
+        <Route path="/explanation" element={<ChooseScreen />} />
+        <Route path="/explanation/:role" element={<GameExplantion />} />
       </Routes>
     </BrowserRouter>
   )

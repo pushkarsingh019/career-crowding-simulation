@@ -170,3 +170,21 @@ button .disabled {
 canvas {
     width: 50%;
 }
+
+/* choice card */
+.choice-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 15px 30px;
+    border-radius: 12px;
+}
+
+.choice-card h3 {
+    font-size: 1.5rem;
+}
+
+.onboarding-choice {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    padding: 10px 15px;
+}
