@@ -30,6 +30,7 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
         <div className="screen">
             <Navbar />
             <HeroText heroText={`The Admin Screen`} />
+            <br />
             <div className="admin-hero">
                 <code>Round Number : {roundNumber}</code>
                 <br />
