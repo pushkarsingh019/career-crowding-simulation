@@ -1,13 +1,15 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 
-function LandingPage({socket, storeData}){
+function LandingPage({storeData}){
 
+    const {roomName} = useParams();
     const [username, setUsername] = useState("");
-    const [room, setRoom] = useState();
+    const [room, setRoom] = useState(roomName);
     // const [simulaton, setSimulation] = useState();
     const navigate = useNavigate();
 

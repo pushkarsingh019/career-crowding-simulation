@@ -188,3 +188,26 @@ canvas {
     margin-top: 2rem;
     padding: 10px 15px;
 }
+
+/* game explanation section */
+
+.explanation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5rem;
+    text-align: left;
+    padding: 10px 30px;
+}
+
+.explanation iframe {
+    border-radius: 12px;
+}
+
+.create-room-btn {
+    margin-left: 3rem;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid;
+    background-color: var(--primary-color);
+    color: white;
+}

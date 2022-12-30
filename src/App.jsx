@@ -101,7 +101,7 @@ function App(){
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage socket={socket} storeData={handleUserData} />} />
+        <Route path="/:roomName" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
         <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
