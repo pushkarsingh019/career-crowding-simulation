@@ -2,8 +2,29 @@ import CareerCard from "../components/CareerCard";
 import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
+import {useTimer} from "react-timer-hook";
 
-function Simulation({socket, choiceHandler, userData, careerData, currentChoice}){
+function Timer({expiryTimestamp}){
+    const {seconds} = useTimer({
+        expiryTimestamp,
+        onExpire : () => console.info("Timer is finished")
+    });
+
+    return(
+        <div className="timer">
+            <span>{seconds}</span>
+        </div>
+    )
+};
+
+
+function Simulation({choiceHandler, userData, careerData, currentChoice}){
+
+    // timer setup
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 30);
+
+
     const navigate = useNavigate();
     const choices = [
         {
@@ -37,13 +58,20 @@ function Simulation({socket, choiceHandler, userData, careerData, currentChoice}
             {Object.keys(userData).length === 0 ?
                 <div>
                     <code>You need to join a room before coming to the simulation room</code>
-                    <button onClick={() => navigate(`/`)}>Join a room</button>
+                    <br />
+                    <br />
+                    <button className="primary-button btn" onClick={() => navigate(`/`)}>Join a room</button>
                 </div> 
                 :
                 <div>
-                    <div className="user-details">
-                        <span><code>Username : {userData.username}</code></span> 
-                        <br /><span><code>Room Number : {userData.room}</code></span>
+                    <div className="details">
+                        <div className="user-details">
+                            <span><code>Username : {userData.username}</code></span> 
+                            <br /><span><code>Room Number : {userData.room}</code></span>
+                        </div>
+                        <div>
+                            <Timer expiryTimestamp={time} />
+                        </div>
                     </div>
                     <div className="instruction">
                         <h1>Pick a career</h1>
