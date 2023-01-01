@@ -15,6 +15,7 @@ import ChooseScreen from "./Screens/onboarding/ChooseScreen";
 import GameExplantion from "./Screens/onboarding/GameExplanation";
 
 // importing config requirements
+// eslint-disable-next-line
 import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
 
@@ -22,8 +23,7 @@ export const origin = developmentSocket
 
 function App(){
 
-  console.log(productionSocket)
-  // setting up socket.io-client
+  // The Global state
   const socket = io.connect(origin, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
@@ -31,6 +31,7 @@ function App(){
   const [roundNumber, setRoundNumber] = useState(1);
   const [currentChart, setCurrentChart] = useState();
   const [choicesData, setChoicesData] = useState();
+  const [roundState, setRoundState] = useState("");
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -47,7 +48,7 @@ function App(){
   }, [])
 
   socket.on("connect", () => {
-    console.log("client connected");
+    console.info("client connected");
   })
 
   // reducers
@@ -97,6 +98,10 @@ function App(){
   async function fetchChartHandler(roundNumber){
     let {data} = await axios.get(`${origin}chart/${roundNumber}`);
     setCurrentChart(data.data);
+  };
+
+  async function handleRoundState(state){
+    setRoundState(state)
   }
 
   return(
@@ -104,9 +109,9 @@ function App(){
       <Routes>
         <Route path="/" element={<LandingPage storeData={handleUserData} />} />  
         <Route path="/:roomName" element={<LandingPage storeData={handleUserData} />} />
-        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
+        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice} roundState={roundState}/>} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
-        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
+        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} toggleRoundState={handleRoundState} />} />
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen />} />
         <Route path="/explanation/:role" element={<GameExplantion />} />

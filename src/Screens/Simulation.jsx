@@ -4,6 +4,11 @@ import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 import {useTimer} from "react-timer-hook";
 
+// importing elements for the notification system
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 function Timer({expiryTimestamp}){
     const {seconds} = useTimer({
         expiryTimestamp,
@@ -23,6 +28,21 @@ function Simulation({choiceHandler, userData, careerData, currentChoice}){
     // timer setup
     const time = new Date();
     time.setSeconds(time.getSeconds() + 30);
+
+    // notification setup
+    function notify(){
+        toast("test notificaton", {
+            position: "top-right",
+            autoClose : 30000,
+            hideProgressBar : false,
+            closeOnClick : false,
+            pauseOnHover : false,
+            draggable : true,
+            progress : undefined,
+            theme : "light",
+            type : "info"
+        })
+    };
 
 
     const navigate = useNavigate();
@@ -53,6 +73,8 @@ function Simulation({choiceHandler, userData, careerData, currentChoice}){
 
     return(
         <section className="screen">
+            {/* notification component start */}
+            <ToastContainer />
             <Navbar />
             <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
@@ -71,6 +93,7 @@ function Simulation({choiceHandler, userData, careerData, currentChoice}){
                         </div>
                         <div>
                             <Timer expiryTimestamp={time} />
+                            <button onClick={notify}>Show notification</button>
                         </div>
                     </div>
                     <div className="instruction">
