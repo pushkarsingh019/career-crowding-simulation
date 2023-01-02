@@ -31,6 +31,7 @@ function App(){
   const [roundNumber, setRoundNumber] = useState(1);
   const [currentChart, setCurrentChart] = useState();
   const [choicesData, setChoicesData] = useState();
+  const [roundState, setRoundState] = useState();
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -81,11 +82,16 @@ function App(){
   };
 
   async function submitChoiceHandler(submit){
+    setRoundState(false)
     if(submit){
       await axios.post(`${origin}`, {roundNumber : roundNumber});
     }
-    setRoundNumber(roundNumber + 1);
   };
+
+  async function startRoundHandler(){
+    setRoundNumber(roundNumber + 1);
+    setRoundState(true)
+  }
 
   async function clearDatabaseHandler(shouldDelete){
     if(shouldDelete){
@@ -105,9 +111,9 @@ function App(){
         <Route path="/" element={<ChooseScreen />} />  
         <Route path="/game" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/game/:roomName" element={<LandingPage storeData={handleUserData} />} />
-        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
+        <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice} />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
-        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
+        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} onStart={startRoundHandler} roundState={roundState} />} />
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen  />} />
         <Route path="/explanation/:role" element={<GameExplantion storeData={handleUserData} />} />

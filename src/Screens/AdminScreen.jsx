@@ -15,8 +15,11 @@ import HeroText from "../components/HeroText";
 
 
 
-function AdminScreen({onSubmit, roundNumber, onDelete}){
+function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){
 
+    function startHandler(){
+        onStart()
+    }
 
     function clickHandler(){
         onSubmit(true)
@@ -32,11 +35,10 @@ function AdminScreen({onSubmit, roundNumber, onDelete}){
             <HeroText heroText={`The Admin Screen`} />
             <br />
             <div className="admin-hero">
-                <code>Round Number : {roundNumber}</code>
+                <p>{roundState ? `Round ${roundNumber} is running` : roundNumber === 1 ? "Start The Round" : `Round ${roundNumber} has ended` }</p>
                 <br />
-                <code>Click the submit button to end one round and clear database to end the entire simulation</code>
-                <br />
-                <button className="primary-button btn" onClick={clickHandler}>Submit</button>
+                <button className="primary-button btn" onClick={startHandler}>Start Next Round</button>
+                <button className=" btn margin-left primary-button" onClick={clickHandler}>End Round {roundNumber}</button>
                 <button className="secondary-button btn margin-left" onClick={deleteHandler}>End Simulation</button>
             </div>
         </div>
