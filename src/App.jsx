@@ -103,13 +103,14 @@ function App(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ChooseScreen />} />  
-        <Route path="/:roomName" element={<LandingPage storeData={handleUserData} />} />
+        <Route path="/game" element={<LandingPage storeData={handleUserData} />} />
+        <Route path="/game/:roomName" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice}  />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
         <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} />} />
         <Route path="/choice" element={<ChooseScreen />} />
-        <Route path="/explanation" element={<ChooseScreen />} />
-        <Route path="/explanation/:role" element={<GameExplantion />} />
+        <Route path="/explanation" element={<ChooseScreen  />} />
+        <Route path="/explanation/:role" element={<GameExplantion storeData={handleUserData} />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
