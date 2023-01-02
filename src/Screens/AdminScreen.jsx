@@ -15,16 +15,15 @@ import HeroText from "../components/HeroText";
 
 
 
-function AdminScreen({onSubmit, roundNumber, onDelete, toggleRoundState}){
+function AdminScreen({onSubmit, roundNumber, onDelete, onStart}){
 
 
     function startHandler(){
-        toggleRoundState("true")
+        onStart(true)
     }
 
     function endHandler(){
         onSubmit(true)
-        toggleRoundState("false")
     };
 
     function deleteHandler(){

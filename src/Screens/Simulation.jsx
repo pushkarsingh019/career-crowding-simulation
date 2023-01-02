@@ -23,7 +23,7 @@ function Timer({expiryTimestamp}){
 };
 
 
-function Simulation({choiceHandler, userData, careerData, currentChoice}){
+function Simulation({choiceHandler, userData, careerData, currentChoice, roundState}){
 
     // timer setup
     const time = new Date();
@@ -98,6 +98,7 @@ function Simulation({choiceHandler, userData, careerData, currentChoice}){
                     </div>
                     <div className="instruction">
                         <h1>Pick a career</h1>
+                        <code>the round state is {`${roundState}`}</code>
                     </div>
                     <div className="choices">
                         <CareerCard key={choices[0].id} name={choices[0].name} id={choices[0].id} changeChoice={onChangeChoice} numberOfPeople={careerData[1]} currentChoice={currentChoice}  />
