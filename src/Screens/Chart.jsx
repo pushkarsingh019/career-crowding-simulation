@@ -17,6 +17,7 @@ import {
 
 function ChartScreen({onFetch, currentChart}){
     const [chartData, setChartData] = useState();
+
     useEffect( () => {
         async function fetchData(){
             let {data} = await axios.get(`${origin}`);
@@ -26,7 +27,6 @@ function ChartScreen({onFetch, currentChart}){
     }, [chartData])
 
     function clickHandler(roundNumber){
-        console.log("clickhandler round Number -> " + roundNumber)
         onFetch(roundNumber)
     };
 
