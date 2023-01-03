@@ -3,7 +3,31 @@ import {Link, useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 
-function Simulation({socket, choiceHandler, userData, careerData, currentChoice, roundState}){
+// componenets for timer and notifications
+import {useTimer} from "react-timer-hook";
+import {toast,ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function Timer({expiryTimestamp}){
+    const {seconds} = useTimer({
+        expiryTimestamp,
+        onExpire : () => console.info("Round is finished")
+    });
+
+    return(
+        <div className="timer">
+            <span>Round closes in {seconds} seconds</span>
+        </div>
+    )
+};
+
+
+function Simulation({socket, choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
+
+    // timer steup
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 30);
+
     const navigate = useNavigate();
     const choices = [
         {
@@ -44,8 +68,14 @@ function Simulation({socket, choiceHandler, userData, careerData, currentChoice,
                     {roundState ? 
                         <div>
                             <div className="user-details">
-                                <span><code>Username : {userData.username}</code></span> 
-                                <br /><span><code>Room Number : {userData.room}</code></span>
+                                <div>
+                                    <p>username : {userData.username}</p>
+                                    <p>room name : {userData.room}</p>
+                                    <p>round number : {roundNumber}</p>
+                                </div>
+                                <div>
+                                    <Timer expiryTimestamp={time} />
+                                </div>
                             </div>
                             <div className="instruction">
                                 <h1>Pick a career</h1>
