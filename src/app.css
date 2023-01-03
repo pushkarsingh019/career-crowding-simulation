@@ -139,10 +139,10 @@ strong {
 }
 
 .user-details {
-    font-family: monospace;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
     text-align: left;
-    margin: 1rem;
-    font-size: small;
 }
 
 .instruction {

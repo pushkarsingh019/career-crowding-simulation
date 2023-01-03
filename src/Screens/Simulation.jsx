@@ -3,7 +3,33 @@ import {Link, useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 
-function Simulation({socket, choiceHandler, userData, careerData, currentChoice, roundState}){
+// componenets for timer and notifications
+import {useTimer} from "react-timer-hook";
+
+
+
+
+function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
+
+    // timer steup
+    const time = new Date();
+    const stopwatch = 30
+    time.setSeconds(time.getSeconds() + stopwatch);
+
+
+    function Timer({expiryTimestamp}){
+        const {seconds} = useTimer({
+            expiryTimestamp,
+            onExpire : () => alert(`Round ${roundNumber} has ended`)
+        });
+    
+        return(
+            <div className="timer">
+                <span>Round closes in {seconds} seconds</span>
+            </div>
+        )
+    };
+
     const navigate = useNavigate();
     const choices = [
         {
@@ -37,15 +63,21 @@ function Simulation({socket, choiceHandler, userData, careerData, currentChoice,
             {Object.keys(userData).length === 0 ?
                 <div>
                     <code>You need to join a room before coming to the simulation room</code>
-                    <button onClick={() => navigate(`/`)}>Join a room</button>
+                    <button onClick={() => navigate(`/game`)}>Join a room</button>
                 </div> 
                 :
                 <div>
                     {roundState ? 
                         <div>
                             <div className="user-details">
-                                <span><code>Username : {userData.username}</code></span> 
-                                <br /><span><code>Room Number : {userData.room}</code></span>
+                                <div>
+                                    <p>username : {userData.username}</p>
+                                    <p>room name : {userData.room}</p>
+                                    <p>round number : {roundNumber}</p>
+                                </div>
+                                <div>
+                                    <Timer expiryTimestamp={time} />
+                                </div>
                             </div>
                             <div className="instruction">
                                 <h1>Pick a career</h1>
