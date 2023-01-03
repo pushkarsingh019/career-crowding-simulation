@@ -5,28 +5,30 @@ import HeroText from "../components/HeroText";
 
 // componenets for timer and notifications
 import {useTimer} from "react-timer-hook";
-import {toast,ToastContainer} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-function Timer({expiryTimestamp}){
-    const {seconds} = useTimer({
-        expiryTimestamp,
-        onExpire : () => console.info("Round is finished")
-    });
-
-    return(
-        <div className="timer">
-            <span>Round closes in {seconds} seconds</span>
-        </div>
-    )
-};
 
 
-function Simulation({socket, choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
+
+
+function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
 
     // timer steup
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 30);
+    const stopwatch = 30
+    time.setSeconds(time.getSeconds() + stopwatch);
+
+
+    function Timer({expiryTimestamp}){
+        const {seconds} = useTimer({
+            expiryTimestamp,
+            onExpire : () => alert(`Round ${roundNumber} has ended`)
+        });
+    
+        return(
+            <div className="timer">
+                <span>Round closes in {seconds} seconds</span>
+            </div>
+        )
+    };
 
     const navigate = useNavigate();
     const choices = [
@@ -61,7 +63,7 @@ function Simulation({socket, choiceHandler, userData, careerData, currentChoice,
             {Object.keys(userData).length === 0 ?
                 <div>
                     <code>You need to join a room before coming to the simulation room</code>
-                    <button onClick={() => navigate(`/`)}>Join a room</button>
+                    <button onClick={() => navigate(`/game`)}>Join a room</button>
                 </div> 
                 :
                 <div>

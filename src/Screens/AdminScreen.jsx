@@ -2,11 +2,31 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 
+// importing notifications
+import {toast,ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){
+function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){ 
+    
+    function notify(){
+        toast("Close the round", {
+            position: "top-right",
+            autoClose : 2000,
+            hideProgressBar : false,
+            closeOnClick : false,
+            pauseOnHover : false,
+            draggable : true,
+            progress : undefined,
+            theme : "light",
+            type : "warning"
+        })
+    };
 
     function startHandler(){
         onStart()
+        setTimeout(function(){
+            notify()
+        }, 29300)
     }
 
     function clickHandler(){
@@ -19,6 +39,7 @@ function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){
 
     return(
         <div className="screen">
+            <ToastContainer />
             <Navbar />
             <HeroText heroText={`The Admin Screen`} />
             <br />

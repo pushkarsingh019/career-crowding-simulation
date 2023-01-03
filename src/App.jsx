@@ -115,7 +115,7 @@ function App(){
         <Route path="/game/:roomName" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice} roundState={roundState} roundNumber={roundNumber} />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
-        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} onStart={startRoundHandler} roundState={roundState} />} />
+        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} onStart={startRoundHandler} roundState={roundState}  />} />
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen  />} />
         <Route path="/explanation/:role" element={<GameExplantion storeData={handleUserData} />} />
