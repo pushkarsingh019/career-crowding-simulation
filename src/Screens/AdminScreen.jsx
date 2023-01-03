@@ -1,18 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
-// import ChartScreen from "./Chart";
-// main functions of the admin screen
-/* 
-    - Have the ability to make the room, and send the link for the room.
-    - see who joined the room and then let them in or out.
-    - control the timer thing.
-    - 
-
-*/
-
-// lets just start by building a simple feature -> posting the final data to the backend.
-
 
 
 function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){
@@ -22,7 +10,7 @@ function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState}){
     }
 
     function clickHandler(){
-        onSubmit(true)
+        onSubmit()
     }
 
     function deleteHandler(){
