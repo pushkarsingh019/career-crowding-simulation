@@ -28,7 +28,7 @@ function App(){
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
-  const [roundNumber, setRoundNumber] = useState(1);
+  const [roundNumber, setRoundNumber] = useState(0);
   const [currentChart, setCurrentChart] = useState();
   const [choicesData, setChoicesData] = useState();
   const [roundState, setRoundState] = useState();

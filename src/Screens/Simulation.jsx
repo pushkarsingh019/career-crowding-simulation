@@ -33,7 +33,6 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
 
     return(
         <section className="screen">
-            {console.log(choices)}
             <Navbar />
             <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
