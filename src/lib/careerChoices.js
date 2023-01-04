@@ -39,7 +39,6 @@ function getCareerChoices(){
         id = id + 1
     }
 
-    console.log(choices)
     return choices
 };
 
