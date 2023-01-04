@@ -2,35 +2,24 @@ import CareerCard from "../components/CareerCard";
 import {Link, useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
-
-// componenets for timer and notifications
-import {useTimer} from "react-timer-hook";
-
-
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
 
-    // timer steup
-    const time = new Date();
-    const stopwatch = 30
-    time.setSeconds(time.getSeconds() + stopwatch);
-
-
-    function Timer({expiryTimestamp}){
-        const {seconds} = useTimer({
-            expiryTimestamp,
-            onExpire : () => alert(`Round ${roundNumber} has ended`)
-        });
-    
-        return(
-            <div className="timer">
-                <span>Round closes in {seconds} seconds</span>
-            </div>
-        )
-    };
-
     const navigate = useNavigate();
+    const [counter, setCounter] = useState(30);
+
+    useEffect(() => {
+        const timer = roundState && counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+        return () => clearInterval(timer)
+    }, [counter, roundState])
+
+    useEffect(() => {
+        setCounter(30)
+    }, [roundState])
+
     const choices = [
         {
             id : 1,
@@ -76,7 +65,7 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                                     <p>round number : {roundNumber}</p>
                                 </div>
                                 <div>
-                                    <Timer expiryTimestamp={time} />
+                                    <p className={counter < 6 && counter > 0 && "red-text"}>{counter > 0 ? `Round ends in ${counter} seconds` : "The round has ended"}</p>
                                 </div>
                             </div>
                             <div className="instruction">
