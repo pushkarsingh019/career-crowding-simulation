@@ -43,6 +43,29 @@ strong {
     color: var(--blue-color);
 }
 
+.start-button {
+    background-color: white;
+    color: #16a34a;
+    border: 1px solid #16a34a;
+}
+
+.start-button:hover{
+    background-color: #16a34a;
+    color: white;
+}
+
+.end-button {
+    background-color: white;
+    color: #e11d48;
+    border: 1px solid #e11d48;
+}
+
+.end-button:hover{
+    background-color: #e11d48;
+    color: white;
+}
+
+
 .primary-button:hover{
     background-color: var(--dark-text-color);
     color: var(--light-blue);
