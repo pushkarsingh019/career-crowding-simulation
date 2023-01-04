@@ -5,11 +5,14 @@ import HeroText from "../components/HeroText";
 import { useState } from "react";
 import { useEffect } from "react";
 
+// importing choices lin
+import getCareerChoices from "../lib/careerChoices";
 
 function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
 
     const navigate = useNavigate();
     const [counter, setCounter] = useState(30);
+    const [choices, setChoices] = useState();
 
     useEffect(() => {
         const timer = roundState && counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -18,26 +21,9 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
 
     useEffect(() => {
         setCounter(30)
+        let data = getCareerChoices()
+        setChoices(data)
     }, [roundState])
-
-    const choices = [
-        {
-            id : 1,
-            name : "Tech",
-        },
-        {
-            id : 2,
-            name : "Management",
-        },
-        {
-            id : 3,
-            name : "Arts",
-        },
-        {
-            id : 4,
-            name : "Biology",
-        },
-    ];
 
     function onChangeChoice(currentChoice){
         // the current choice reflects back the choice that they have made
@@ -47,6 +33,7 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
 
     return(
         <section className="screen">
+            {console.log(choices)}
             <Navbar />
             <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
@@ -71,13 +58,17 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                             <div className="instruction">
                                 <h1>Pick a career</h1>
                             </div>
-                            <div className="choices">
-                                <CareerCard key={choices[0].id} name={choices[0].name} id={choices[0].id} changeChoice={onChangeChoice} numberOfPeople={careerData[1]} currentChoice={currentChoice}  />
-                                <CareerCard key={choices[1].id} name={choices[1].name} id={choices[1].id} changeChoice={onChangeChoice} numberOfPeople={careerData[2]} currentChoice={currentChoice}  />
-                                <CareerCard key={choices[2].id} name={choices[2].name} id={choices[2].id} changeChoice={onChangeChoice} numberOfPeople={careerData[3]} currentChoice={currentChoice} />
-                                <CareerCard key={choices[3].id} name={choices[3].name} id={choices[3].id} changeChoice={onChangeChoice} numberOfPeople={careerData[4]} currentChoice={currentChoice} />
+                                {choices ? 
+                                     <div className="choices">
+                                        <CareerCard key={choices[0].id} name={choices[0].name} id={choices[0].id} changeChoice={onChangeChoice} numberOfPeople={careerData[1]} currentChoice={currentChoice}  />
+                                        <CareerCard key={choices[1].id} name={choices[1].name} id={choices[1].id} changeChoice={onChangeChoice} numberOfPeople={careerData[2]} currentChoice={currentChoice}  />
+                                        <CareerCard key={choices[2].id} name={choices[2].name} id={choices[2].id} changeChoice={onChangeChoice} numberOfPeople={careerData[3]} currentChoice={currentChoice} />
+                                        <CareerCard key={choices[3].id} name={choices[3].name} id={choices[3].id} changeChoice={onChangeChoice} numberOfPeople={careerData[4]} currentChoice={currentChoice} />
+                                    </div>
+                                    :
+                                    "Choices data not available"
+                                }
                             </div>
-                        </div>
                     :
                         <div>
                             <br />
