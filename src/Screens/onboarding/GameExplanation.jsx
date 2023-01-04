@@ -5,8 +5,13 @@ import {Link} from "react-router-dom"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// import axios
+import axios from "axios";
+import { developmentSocket } from "../../config/config";
+
 function GameExplantion({storeData}){
     const origin = "https://simulation.stoicpushkar.com"
+
     let {role} = useParams();
 
 
@@ -14,11 +19,19 @@ function GameExplantion({storeData}){
 
         const [gameLink, setGameLink] = useState();
         const [roomNumber, setRoomNumber] = useState();
+        const [password, setPassword] = useState();
         const [copyText, setCopyText] = useState("click to copy the sharable link")
-
-        function createGameLink(event){
+ 
+        async function createGameLink(event){
             event.preventDefault();
             setGameLink(`/game/${roomNumber}`)
+
+            let adminCredentials = {
+                roomNumber : roomNumber,
+                password : password
+            };
+
+            await axios.post(`${developmentSocket}auth`, adminCredentials)
         };
 
 
@@ -37,6 +50,8 @@ function GameExplantion({storeData}){
                     <h2>Create the game credentials</h2>
                     <form onSubmit={createGameLink} className="form">
                         <input required style={{marginTop : "0px"}} type="text" placeholder="A Unique Room Name" onChange={(e) => setRoomNumber(e.target.value)} value={roomNumber || ""}/>
+                        <br />
+                        <input required type="password" placeholder="Admin password" onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
                         <button className="create-room-btn" type="submit">Create Room</button>
                     </form>
                     <code>{gameLink ? <Link to={gameLink}>Join the game</Link> : "Create room to get the game link"}</code>

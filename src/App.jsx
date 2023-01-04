@@ -32,6 +32,7 @@ function App(){
   const [currentChart, setCurrentChart] = useState();
   const [choicesData, setChoicesData] = useState();
   const [roundState, setRoundState] = useState();
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -107,6 +108,16 @@ function App(){
     setCurrentChart(data.data);
   }
 
+  async function adminAuth(credentials){
+    let {data} = await axios.get(`${origin}auth/${credentials.password}/room/${credentials.roomNumber}`)
+    if(data.code === 1){
+      setIsAdmin(true)
+    }
+    else{
+      setIsAdmin(false)
+    }
+  }
+
   return(
     <BrowserRouter>
       <Routes>
@@ -115,7 +126,7 @@ function App(){
         <Route path="/game/:roomName" element={<LandingPage storeData={handleUserData} />} />
         <Route path="/simulation" element={<Simulation socket={socket} userData={userData} careerData={careerData} choiceHandler={handleChoiceChange} currentChoice={currentChoice} roundState={roundState} roundNumber={roundNumber} />} />
         <Route path="/chart" element={<ChartScreen onFetch={fetchChartHandler} currentChart={currentChart} choicesData={choicesData} /> } />
-        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} onStart={startRoundHandler} roundState={roundState}  />} />
+        <Route path="/admin" element={<AdminScreen onSubmit={submitChoiceHandler} roundNumber={roundNumber} onDelete={clearDatabaseHandler} onStart={startRoundHandler} roundState={roundState} isAdmin={isAdmin} onLogin={adminAuth} />} />
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen  />} />
         <Route path="/explanation/:role" element={<GameExplantion storeData={handleUserData} />} />
