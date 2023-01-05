@@ -17,7 +17,7 @@ import {
     Legend
   } from "chart.js";
 
-function ChartScreen({onFetch, currentChart}){
+function ChartScreen({onFetch, currentChart, roundState}){
     const [chartData, setChartData] = useState();
     const [round, setRound] = useState();
 
@@ -27,7 +27,7 @@ function ChartScreen({onFetch, currentChart}){
             setChartData(data.data);
         };
         fetchData();
-    }, [chartData])
+    }, [roundState])
 
     function clickHandler(roundNumber){
         setRound(roundNumber)
