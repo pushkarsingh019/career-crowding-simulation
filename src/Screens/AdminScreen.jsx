@@ -43,6 +43,7 @@ function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAd
 
     return(
         <div className="screen">
+            {isAdmin}
             <ToastContainer />
             <Navbar />
             <HeroText heroText={`The Admin Screen`} />

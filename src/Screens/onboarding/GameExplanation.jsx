@@ -54,9 +54,9 @@ function GameExplantion({storeData}){
                         <input required type="password" placeholder="Admin password" onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
                         <button className="create-room-btn" type="submit">Create Room</button>
                     </form>
-                    <code>{gameLink ? <Link to={gameLink}>Join the game</Link> : "Create room to get the game link"}</code>
+                    <code>{gameLink ? <Link to={`/admin`}>Join the game</Link> : "Create room to get the game link"}</code>
                     <br />
-                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${origin}/game/${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
+                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${origin}${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
                 </div>
             </section>
         )
