@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 import Login from "./Login";
+import { useNavigate } from "react-router-dom";
 
 // importing notifications
 import {toast,ToastContainer} from "react-toastify";
@@ -9,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAdmin,onLogin}){ 
     
+    const navigate = useNavigate();
     function notify(){
         toast("Close the round", {
             position: "top-right",
@@ -34,8 +36,9 @@ function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAd
         onSubmit()
     }
 
-    function deleteHandler(){
-        onDelete(true)
+    async function deleteHandler(){
+        await onDelete(true)
+        navigate(`/end`)
     }
 
     return(

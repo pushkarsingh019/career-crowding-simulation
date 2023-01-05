@@ -284,3 +284,8 @@ canvas {
     background-color: var(--primary-color);
     color: white;
 }
+
+.explanation a {
+    text-decoration: none;
+    color: #1d4ed8;
+}
