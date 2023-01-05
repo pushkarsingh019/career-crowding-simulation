@@ -25,6 +25,7 @@ function Login({onLogin}){
 
     return(
         <form onSubmit={loginHandler} className="form">
+            <h4>Login to conduct the game</h4>
             <input required type="text" placeholder="Your Room's Name" onChange={(e) => setRoomNumber(e.target.value)} value={roomNumber || ""}/>
             <br />
             <input required type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password || ""}/>
