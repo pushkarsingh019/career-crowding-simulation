@@ -5,6 +5,8 @@ import { Bar } from "react-chartjs-2"
 import Navbar from "../components/Navbar"
 import HeroText from "../components/HeroText";
 
+import {getCareerLabels} from "../lib/careerChoices"
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -17,6 +19,7 @@ import {
 
 function ChartScreen({onFetch, currentChart}){
     const [chartData, setChartData] = useState();
+    const [round, setRound] = useState();
 
     useEffect( () => {
         async function fetchData(){
@@ -27,6 +30,7 @@ function ChartScreen({onFetch, currentChart}){
     }, [chartData])
 
     function clickHandler(roundNumber){
+        setRound(roundNumber)
         onFetch(roundNumber)
     };
 
@@ -57,7 +61,7 @@ function ChartScreen({onFetch, currentChart}){
     let labels = [];
     let chartDataset = [];
     if(currentChart){
-        labels = Object.keys(currentChart);
+        labels = getCareerLabels(round)
         chartDataset = Object.values(currentChart);
     };
 
@@ -78,7 +82,7 @@ function ChartScreen({onFetch, currentChart}){
             <br />
             {chartData ? chartData.map((chart) => {
                 return(
-                    <button className="btn options margin-left" onClick={() => clickHandler(chart.round )} key={chart._id}>Round {chart.round}</button>
+                    <button className="btn options margin-right" onClick={() => {clickHandler(chart.round)}} key={chart._id}>Round {chart.round}</button>
                 )
             }) : <code>chart data does not exist</code> }
             {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}

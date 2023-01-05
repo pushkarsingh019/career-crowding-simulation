@@ -21,9 +21,9 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
 
     useEffect(() => {
         setCounter(30)
-        let data = getCareerChoices()
+        let data = getCareerChoices(roundNumber)
         setChoices(data)
-    }, [roundState])
+    }, [roundState, roundNumber])
 
     function onChangeChoice(currentChoice){
         // the current choice reflects back the choice that they have made

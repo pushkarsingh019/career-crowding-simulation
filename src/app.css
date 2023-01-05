@@ -81,6 +81,10 @@ strong {
     margin-left: 2rem;
 }
 
+.margin-right{
+    margin-right: 2rem;
+}
+
 .options {
     background-color: #fecaca;
     color: var(--dark-text-color);

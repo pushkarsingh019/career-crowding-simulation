@@ -11,12 +11,16 @@ const careerChoices = [
     ["Fiction Writer", "Non Fiction Writer", "Poet", "Technical Writer"]
 ]
 
-let id = 0;
+function getCareerChoices(roundNumber){
+    let id;
 
-function getCareerChoices(){
-    if(id === careerChoices.length){
-        id = 0
+    if(roundNumber < careerChoices.length){
+        id = roundNumber;
     }
+    else{
+        id = Math.floor(Math.random() * 10)
+    }
+
     const choices = [
         {
             id : 1,
@@ -35,11 +39,12 @@ function getCareerChoices(){
             name : careerChoices[id][3]
         }
     ];
-    if(id < careerChoices.length){
-        id = id + 1
-    }
 
     return choices
 };
+
+export function getCareerLabels(roundNumber){
+    return careerChoices[roundNumber]
+}
 
 export default getCareerChoices
