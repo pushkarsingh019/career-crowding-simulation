@@ -13,7 +13,7 @@ function GameExplantion({storeData}){
     const origin = "https://simulation.stoicpushkar.com"
 
     let {role} = useParams();
-
+    let {roomName} = useParams();
 
     function AdminExplanation(){
 
@@ -24,7 +24,7 @@ function GameExplantion({storeData}){
  
         async function createGameLink(event){
             event.preventDefault();
-            setGameLink(`/game/${roomNumber}`)
+            setGameLink(`/explanation/player/${roomNumber}`)
 
             let adminCredentials = {
                 roomNumber : roomNumber,
@@ -66,7 +66,7 @@ function GameExplantion({storeData}){
 
         const navigate = useNavigate();
         const [username, setUsername] = useState("");
-        const [room, setRoom] = useState("");
+        const [room, setRoom] = useState(roomName);
 
         async function formHandler(event){
             event.preventDefault();

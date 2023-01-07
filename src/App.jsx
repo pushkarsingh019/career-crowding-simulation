@@ -131,6 +131,7 @@ function App(){
         <Route path="/choice" element={<ChooseScreen />} />
         <Route path="/explanation" element={<ChooseScreen  />} />
         <Route path="/explanation/:role" element={<GameExplantion storeData={handleUserData} />} />
+        <Route path="/explanation/player/:roomName" element={<GameExplantion storeData={handleUserData} />} />
         <Route path="/end" element={<DebreifScreen />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
