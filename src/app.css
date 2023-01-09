@@ -276,8 +276,9 @@ canvas {
     padding: 10px 30px;
 }
 
-.explanation iframe {
+.explanation video {
     border-radius: 12px;
+    width: 600px;
 }
 
 .create-room-btn {
