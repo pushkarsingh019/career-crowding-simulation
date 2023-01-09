@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import {toast,ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// importing timer config variables
+import { time, stopTimer } from "../config/config";
+
 function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAdmin,onLogin}){ 
     
     const navigate = useNavigate();
@@ -29,7 +32,7 @@ function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAd
         onStart()
         setTimeout(function(){
             notify()
-        }, 29300)
+        }, stopTimer)
     }
 
     function clickHandler(){
