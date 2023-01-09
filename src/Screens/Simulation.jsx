@@ -8,10 +8,13 @@ import { useEffect } from "react";
 // importing choices lin
 import getCareerChoices from "../lib/careerChoices";
 
+// importing timer variable
+import {seconds } from "../config/config";
+
 function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
 
     const navigate = useNavigate();
-    const [counter, setCounter] = useState(30);
+    const [counter, setCounter] = useState(seconds);
     const [choices, setChoices] = useState();
 
     useEffect(() => {
@@ -20,7 +23,7 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
     }, [counter, roundState])
 
     useEffect(() => {
-        setCounter(30)
+        setCounter(seconds)
         let data = getCareerChoices(roundNumber)
         setChoices(data)
     }, [roundState, roundNumber])
