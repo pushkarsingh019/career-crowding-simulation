@@ -9,10 +9,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { developmentSocket } from "../../config/config";
 
-// importing videos
-import conductVideo from "../../assets/video/conduct.mp4"
-import playVideo from "../../assets/video/play.mp4"
-
 function GameExplantion({storeData}){
     const origin = "http://localhost:3000"
 
@@ -55,7 +51,7 @@ function GameExplantion({storeData}){
                     <code style={{fontFamily : "monospace"}}>Here's a shot video explaining the process</code>
                     <br />
                     <br />
-                    <video src={conductVideo} type="video/mp4" controls>Video did not load</video>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9GH_AarysN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div>
                     <br />
@@ -106,7 +102,7 @@ function GameExplantion({storeData}){
                     <code style={{fontFamily : "monospace", fontSize : "1rem"}}>Here's a short video to understand how to play the game</code>
                     <br />
                     <br />
-                    <video src={playVideo} controls type="video/mp4" preload="auto"></video>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/EodLYrqbkng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div>
                     <br />
