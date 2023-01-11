@@ -10,7 +10,7 @@ import axios from "axios";
 import { developmentSocket } from "../../config/config";
 
 function GameExplantion({storeData}){
-    const origin = "https://simulation.stoicpushkar.com"
+    const origin = "http://localhost:3000"
 
     let {role} = useParams();
     let {roomName} = useParams();
@@ -40,10 +40,18 @@ function GameExplantion({storeData}){
                 <div>
                     <br />
                     <h2>How to conduct the game</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, iusto. Dicta quibusdam, quasi consequuntur impedit reiciendis earum aliquam quas libero aut, maiores cupiditate perferendis unde laborum qui corrupti? Tenetur ullam maxime illum minima sed illo odio libero reprehenderit ipsam doloribus deserunt quas quos vel, animi aperiam! Nihil nisi commodi eaque? Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores molestiae nesciunt vero libero sunt illum quibusdam doloribus fuga ipsa accusamus? </p>
                     <br />
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/J4ypOJbC1lA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    <p>As an admin, your main task it to conduct the game and decide when to start and stop the round.
+                    First, when you create the game essentials, you will get the links to conduct the game and to share it to fellow participants. After you have shared the link, click on <i>join the game</i> and log in with the credentials you have created.</p>
+                    <br />
+                    <p>On your admin page, you will have two options <strong>Start round 1</strong> and <strong>End Simulation</strong>. When you start the round, the players would be able to play the game. After 20 seconds of starting the round you will get a notification to close the round. Thats when you should close the round and wait some seconds to start the next round.</p>
+                    <br />
+                    <p>continue this for 10 rounds and end the simulation.</p>
+                    <br />
+                    <code style={{fontFamily : "monospace"}}>Here's a shot video explaining the process</code>
+                    <br />
+                    <br />
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/9GH_AarysN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div>
                     <br />
@@ -87,14 +95,14 @@ function GameExplantion({storeData}){
                     <h2>How to win the game</h2>
                     <br />
                     <p>In order to win the game, all you have to do is <strong>make choices that will help you make the most amount of money.</strong>
-                    On the screen there would be four career choices, and you have 30 seconds to choose a career. After 30 seconds, you will get to know which choice would have made you the most amount of money. </p>
+                    On the screen there would be four career choices, and you have 20 seconds to choose a career. After 20 seconds, you will get to know which choice would have made you the most amount of money. </p>
                     <br />
                     <p>In order to win the game, you have to make the right choices and make the most amount of money at the end of the game.</p>
                     <br />
                     <code style={{fontFamily : "monospace", fontSize : "1rem"}}>Here's a short video to understand how to play the game</code>
                     <br />
                     <br />
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/J4ypOJbC1lA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/EodLYrqbkng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div>
                     <br />

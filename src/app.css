@@ -278,6 +278,7 @@ canvas {
 
 .explanation iframe {
     border-radius: 12px;
+    width: 600px;
 }
 
 .create-room-btn {
