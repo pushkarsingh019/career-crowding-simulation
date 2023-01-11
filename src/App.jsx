@@ -20,7 +20,7 @@ import GameExplantion from "./Screens/onboarding/GameExplanation";
 import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
 
-export const origin = developmentSocket
+export const origin = productionSocket;
 
 function App(){
 
