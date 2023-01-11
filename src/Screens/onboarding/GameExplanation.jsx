@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 // import axios
 import axios from "axios";
-import { developmentSocket } from "../../config/config";
+import { productionSocket } from "../../config/config";
 
 function GameExplantion({storeData}){
-    const origin = "http://localhost:3000"
+    const origin = "http://simulation.stoicpushkar.com"
 
     let {role} = useParams();
     let {roomName} = useParams();
@@ -31,7 +31,7 @@ function GameExplantion({storeData}){
                 password : password
             };
 
-            await axios.post(`${developmentSocket}auth`, adminCredentials)
+            await axios.post(`${productionSocket}auth`, adminCredentials)
         };
 
 
