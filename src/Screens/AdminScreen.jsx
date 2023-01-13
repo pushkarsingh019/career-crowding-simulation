@@ -9,7 +9,7 @@ import {toast,ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // importing timer config variables
-import { time, stopTimer } from "../config/config";
+import { stopTimer } from "../config/config";
 
 function AdminScreen({onSubmit, roundNumber, onDelete, onStart, roundState, isAdmin,onLogin}){ 
     
