@@ -17,15 +17,14 @@ import GameExplantion from "./Screens/onboarding/GameExplanation";
 
 // importing config requirements
 // eslint-disable-next-line
-import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
 
-export const origin = productionSocket;
+import { socketInUse } from "./config/config";
 
 function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(origin, {transports : ['websocket']});
+  const socket = io.connect(socketInUse, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
@@ -50,7 +49,7 @@ function App(){
 
   useEffect(() => {
     async function getChartData(){
-      let {data} = await axios.get(`${origin}`);
+      let {data} = await axios.get(`${socketInUse}`);
       setChoicesData(data.data)
     }
     getChartData();
@@ -91,26 +90,26 @@ function App(){
   };
 
   async function submitChoiceHandler(){
-    await axios.post(`${origin}`, {roundNumber : roundNumber});
+    await axios.post(`${socketInUse}`, {roundNumber : roundNumber});
   };
 
   async function startRoundHandler(){
-      await axios.get(`${origin}start`)
-  }
+      await axios.get(`${socketInUse}start`)
+  };
 
   async function clearDatabaseHandler(shouldDelete){
     if(shouldDelete){
-      await axios.delete(`${origin}`);
+      await axios.delete(`${socketInUse}`);
     }
   };
 
   async function fetchChartHandler(roundNumber){
-    let {data} = await axios.get(`${origin}chart/${roundNumber}`);
+    let {data} = await axios.get(`${socketInUse}chart/${roundNumber}`);
     setCurrentChart(data.data);
   }
 
   async function adminAuth(credentials){
-    let {data} = await axios.get(`${origin}auth/${credentials.password}/room/${credentials.roomNumber}`)
+    let {data} = await axios.get(`${socketInUse}auth/${credentials.password}/room/${credentials.roomNumber}`)
     if(data.code === 1){
       setIsAdmin(true)
     }

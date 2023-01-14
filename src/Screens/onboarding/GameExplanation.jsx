@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 // import axios
 import axios from "axios";
-import { productionSocket } from "../../config/config";
+import { originInUse, socketInUse } from "../../config/config";
 
 function GameExplantion({storeData}){
-    const origin = "http://simulation.stoicpushkar.com"
 
     let {role} = useParams();
     let {roomName} = useParams();
@@ -31,7 +30,7 @@ function GameExplantion({storeData}){
                 password : password
             };
 
-            await axios.post(`${productionSocket}auth`, adminCredentials)
+            await axios.post(`${socketInUse}auth`, adminCredentials)
         };
 
 
@@ -64,7 +63,7 @@ function GameExplantion({storeData}){
                     </form>
                     <code>{gameLink ? <Link to={`/admin`}>Join the game</Link> : "Create room to get the game link"}</code>
                     <br />
-                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${origin}${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
+                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${originInUse}${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
                 </div>
             </section>
         )
