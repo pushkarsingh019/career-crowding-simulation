@@ -17,13 +17,15 @@ import GameExplantion from "./Screens/onboarding/GameExplanation";
 
 // importing config requirements
 // eslint-disable-next-line
+import {developmentSocket, productionSocket} from "./config/config"
 import { useState } from "react";
-import {socketInUse} from "./config/config"
+
+export const origin = productionSocket;
 
 function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(socketInUse, {transports : ['websocket']});
+  const socket = io.connect(origin, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
@@ -89,26 +91,26 @@ function App(){
   };
 
   async function submitChoiceHandler(){
-    await axios.post(`${socketInUse}`, {roundNumber : roundNumber});
+    await axios.post(`${origin}`, {roundNumber : roundNumber});
   };
 
   async function startRoundHandler(){
-      await axios.get(`${socketInUse}start`)
+      await axios.get(`${origin}start`)
   }
 
   async function clearDatabaseHandler(shouldDelete){
     if(shouldDelete){
-      await axios.delete(`${socketInUse}`);
+      await axios.delete(`${origin}`);
     }
   };
 
   async function fetchChartHandler(roundNumber){
-    let {data} = await axios.get(`${socketInUse}chart/${roundNumber}`);
+    let {data} = await axios.get(`${origin}chart/${roundNumber}`);
     setCurrentChart(data.data);
   }
 
   async function adminAuth(credentials){
-    let {data} = await axios.get(`${socketInUse}auth/${credentials.password}/room/${credentials.roomNumber}`)
+    let {data} = await axios.get(`${origin}auth/${credentials.password}/room/${credentials.roomNumber}`)
     if(data.code === 1){
       setIsAdmin(true)
     }

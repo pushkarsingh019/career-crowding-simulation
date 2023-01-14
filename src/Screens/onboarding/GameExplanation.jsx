@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 // import axios
 import axios from "axios";
-import { originInUse, socketInUse } from "../../config/config";
+import { productionSocket } from "../../config/config";
 
 function GameExplantion({storeData}){
+    const origin = "http://simulation.stoicpushkar.com"
 
     let {role} = useParams();
     let {roomName} = useParams();
@@ -23,14 +24,14 @@ function GameExplantion({storeData}){
  
         async function createGameLink(event){
             event.preventDefault();
-            setGameLink(`explanation/player/${roomNumber}`)
+            setGameLink(`/explanation/player/${roomNumber}`)
 
             let adminCredentials = {
                 roomNumber : roomNumber,
                 password : password
             };
 
-            await axios.post(`${socketInUse}auth`, adminCredentials)
+            await axios.post(`${productionSocket}auth`, adminCredentials)
         };
 
 
@@ -63,7 +64,7 @@ function GameExplantion({storeData}){
                     </form>
                     <code>{gameLink ? <Link to={`/admin`}>Join the game</Link> : "Create room to get the game link"}</code>
                     <br />
-                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${originInUse}${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
+                    {gameLink ? <span onClick={() => {navigator.clipboard.writeText(`${origin}${gameLink}`); setCopyText("coped to clipboard")}}>{copyText}</span> : ""}
                 </div>
             </section>
         )
@@ -101,7 +102,7 @@ function GameExplantion({storeData}){
                     <code style={{fontFamily : "monospace", fontSize : "1rem"}}>Here's a short video to understand how to play the game</code>
                     <br />
                     <br />
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/EodLYrqbkng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullfcreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/EodLYrqbkng" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div>
                     <br />

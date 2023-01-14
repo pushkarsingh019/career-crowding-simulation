@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {origin} from "../App";
 import { Bar } from "react-chartjs-2"
 import Navbar from "../components/Navbar"
 import HeroText from "../components/HeroText";
-
-import { socketInUse } from "../config/config";
 
 import {getCareerLabels} from "../lib/careerChoices"
 
@@ -24,7 +23,7 @@ function ChartScreen({onFetch, currentChart, roundState}){
 
     useEffect( () => {
         async function fetchData(){
-            let {data} = await axios.get(`${socketInUse}`);
+            let {data} = await axios.get(`${origin}`);
             setChartData(data.data);
         };
         fetchData();
