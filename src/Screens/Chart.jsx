@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { socketInUse } from "../config/config";
 import { Bar } from "react-chartjs-2"
-import Navbar from "../components/Navbar"
 import HeroText from "../components/HeroText";
 
 import {getCareerLabels} from "../lib/careerChoices"
@@ -17,9 +16,11 @@ import {
     Legend
   } from "chart.js";
 
+
 function ChartScreen({onFetch, currentChart, roundState}){
     const [chartData, setChartData] = useState();
     const [round, setRound] = useState();
+    const [chosen, setChosen] = useState();
 
     useEffect( () => {
         async function fetchData(){
@@ -77,15 +78,22 @@ function ChartScreen({onFetch, currentChart, roundState}){
 
     return(
         <div className="screen chart-screen">
-            <Navbar />
-            <HeroText heroText={`Chart Screen`} />
+            <HeroText heroText={`measure how your career performed`} />
             <br />
-            {chartData ? chartData.map((chart) => {
-                return(
-                    <button className="btn options margin-right" onClick={() => {clickHandler(chart.round)}} key={chart._id}>Round {chart.round}</button>
-                )
-            }) : <code>chart data does not exist</code> }
-            {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
+            <div className="chart-screen-flex">
+                <div>
+                    {chartData ? chartData.map((chart) => {
+                        return(
+                            <button className={chosen === chart._id ? "btn options margin-right chosen-button" : "btn options margin-right"} onClick={() => {clickHandler(chart.round); setChosen(chart._id)}} key={chart._id}>Round {chart.round}</button>
+                        )
+                    }) : <code>chart data does not exist</code> }
+                </div>
+                <br />
+                <br />
+                <div className="chart-canvas">
+                    {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
+                </div>
+            </div>
         </div>
     )
         }

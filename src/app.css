@@ -86,9 +86,20 @@ strong {
 }
 
 .options {
-    background-color: #fecaca;
-    color: var(--dark-text-color);
-    border: none;
+    background-color: white;
+    color: #e11d48;
+    border: 1px solid #e11d48;
+    font-size: 14px;
+}
+
+.options:hover{
+    background-color: #e11d48;
+    color: white;
+}
+
+.chosen-button {
+    background-color: #e11d48;
+    color: white;
 }
 
 /* navbar section */
@@ -120,7 +131,7 @@ strong {
 }
 
 .hero-text {
-    margin-top: 3rem;
+    margin-top: 1rem;
     font-size: 2rem;
 }
 
@@ -244,9 +255,15 @@ button .disabled {
 
 
 /* chart page */
-canvas {
-    width: 50%;
+.chart-canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    padding-bottom: 200px;
+    padding-top: 0px;
 }
+
 
 /* choice card */
 .choice-card {

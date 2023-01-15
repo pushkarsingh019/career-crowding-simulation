@@ -1,7 +1,6 @@
 import CareerCard from "../components/CareerCard";
-import {Link, useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
-import HeroText from "../components/HeroText";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -11,7 +10,10 @@ import getCareerChoices from "../lib/careerChoices";
 // importing timer variable
 import {seconds } from "../config/config";
 
-function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber}){
+// importing chartScreen
+import ChartScreen from "./Chart";
+
+function Simulation({choiceHandler, userData, careerData, currentChoice, roundState, roundNumber, onFetch, currentChart, choicesData}){
 
     const navigate = useNavigate();
     const [counter, setCounter] = useState(seconds);
@@ -31,15 +33,17 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
     function onChangeChoice(currentChoice){
         // the current choice reflects back the choice that they have made
         choiceHandler(currentChoice);;
-    }
+    };
+
     
 
     return(
         <section className="screen">
             <Navbar />
-            <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
                 <div>
+                    <br />
+                    <br />
                     <code>You need to join a room before coming to the simulation room</code>
                     <button onClick={() => navigate(`/game`)}>Join a room</button>
                 </div> 
@@ -47,6 +51,8 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                 <div>
                     {roundState ? 
                         <div>
+                            <br />
+                            <br />
                             <div className="user-details">
                                 <div>
                                     <p>username : {userData.username}</p>
@@ -72,11 +78,16 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                                 }
                             </div>
                     :
-                        <div>
-                            <br />
-                            <p style={{fontFamily : "monospace", fontSize : "1rem"}}>Simulation round is closed right now.</p>
-                            <p style={{fontFamily : "monospace", fontSize : "1rem"}}>You can check how you are performing by looking at the <Link to={`/chart`}>charts</Link> or wait while the round starts shortly</p>
-                        </div>
+                        roundNumber === 0 ? 
+                            <div>
+                                <br />
+                                <br />
+                                <br />
+                                <p style={{fontFamily : "monospace", fontSize : "1rem"}}>Simulation is closed right now.</p>
+                                <i style={{fontSize : "0.9rem"}}>The game could be starting any moment. <strong>hang tight!</strong></i>
+                            </div>
+                            :
+                            <ChartScreen onFetch={onFetch} currentChart={currentChart} choicesData={choicesData} roundState={roundState} />
                     }
                     
                 </div>
