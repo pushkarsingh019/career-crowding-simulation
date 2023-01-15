@@ -1,7 +1,6 @@
 import CareerCard from "../components/CareerCard";
 import {useNavigate} from "react-router-dom"
 import Navbar from "../components/Navbar";
-import HeroText from "../components/HeroText";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -41,16 +40,21 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
     return(
         <section className="screen">
             <Navbar />
-            <HeroText heroText={`Simulation Screen`} />
             {Object.keys(userData).length === 0 ?
                 <div>
+                    <br />
+                    <br />
                     <code>You need to join a room before coming to the simulation room</code>
                     <button onClick={() => navigate(`/game`)}>Join a room</button>
                 </div> 
                 :
                 <div>
+                    <br />
+                    <br />
                     {roundState ? 
                         <div>
+                            <br />
+                            <br />
                             <div className="user-details">
                                 <div>
                                     <p>username : {userData.username}</p>
@@ -78,6 +82,8 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                     :
                         roundNumber === 0 ? 
                             <div>
+                                <br />
+                                <br />
                                 <br />
                                 <p style={{fontFamily : "monospace", fontSize : "1rem"}}>Simulation is closed right now.</p>
                                 <i style={{fontSize : "0.9rem"}}>The game could be starting any moment. <strong>hang tight!</strong></i>

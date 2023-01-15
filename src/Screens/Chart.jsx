@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { socketInUse } from "../config/config";
 import { Bar } from "react-chartjs-2"
+import HeroText from "../components/HeroText";
 
 import {getCareerLabels} from "../lib/careerChoices"
 
@@ -14,6 +15,7 @@ import {
     Tooltip,
     Legend
   } from "chart.js";
+
 
 function ChartScreen({onFetch, currentChart, roundState}){
     const [chartData, setChartData] = useState();
@@ -76,13 +78,13 @@ function ChartScreen({onFetch, currentChart, roundState}){
 
     return(
         <div className="screen chart-screen">
+            <HeroText heroText={`measure how your career performed`} />
             <br />
             {chartData ? chartData.map((chart) => {
                 return(
                     <button className={chosen === chart._id ? "btn options margin-right chosen-button" : "btn options margin-right"} onClick={() => {clickHandler(chart.round); setChosen(chart._id)}} key={chart._id}>Round {chart.round}</button>
                 )
             }) : <code>chart data does not exist</code> }
-            <br />
             <br />
             <br />
             {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
