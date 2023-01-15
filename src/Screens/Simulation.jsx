@@ -76,12 +76,14 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                                 }
                             </div>
                     :
-                        <ChartScreen onFetch={onFetch} currentChart={currentChart} choicesData={choicesData} roundState={roundState} />
-                        // <div>
-                        //     <br />
-                        //     <p style={{fontFamily : "monospace", fontSize : "1rem"}}>Simulation round is closed right now.</p>
-                        //     <p style={{fontFamily : "monospace", fontSize : "1rem"}}>You can check how you are performing by looking at the <Link to={`/chart`}>charts</Link> or wait while the round starts shortly</p>
-                        // </div>
+                        roundNumber === 0 ? 
+                            <div>
+                                <br />
+                                <p style={{fontFamily : "monospace", fontSize : "1rem"}}>Simulation is closed right now.</p>
+                                <i style={{fontSize : "0.9rem"}}>The game could be starting any moment. <strong>hang tight!</strong></i>
+                            </div>
+                            :
+                            <ChartScreen onFetch={onFetch} currentChart={currentChart} choicesData={choicesData} roundState={roundState} />
                     }
                     
                 </div>
