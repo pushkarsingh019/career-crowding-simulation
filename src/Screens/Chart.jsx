@@ -18,6 +18,7 @@ import {
 function ChartScreen({onFetch, currentChart, roundState}){
     const [chartData, setChartData] = useState();
     const [round, setRound] = useState();
+    const [chosen, setChosen] = useState();
 
     useEffect( () => {
         async function fetchData(){
@@ -78,9 +79,12 @@ function ChartScreen({onFetch, currentChart, roundState}){
             <br />
             {chartData ? chartData.map((chart) => {
                 return(
-                    <button className="btn options margin-right" onClick={() => {clickHandler(chart.round)}} key={chart._id}>Round {chart.round}</button>
+                    <button className={chosen === chart._id ? "btn options margin-right chosen-button" : "btn options margin-right"} onClick={() => {clickHandler(chart.round); setChosen(chart._id)}} key={chart._id}>Round {chart.round}</button>
                 )
             }) : <code>chart data does not exist</code> }
+            <br />
+            <br />
+            <br />
             {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
         </div>
     )

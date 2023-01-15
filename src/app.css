@@ -86,9 +86,20 @@ strong {
 }
 
 .options {
-    background-color: #fecaca;
-    color: var(--dark-text-color);
-    border: none;
+    background-color: white;
+    color: #e11d48;
+    border: 1px solid #e11d48;
+    font-size: 14px;
+}
+
+.options:hover{
+    background-color: #e11d48;
+    color: white;
+}
+
+.chosen-button {
+    background-color: #e11d48;
+    color: white;
 }
 
 /* navbar section */
