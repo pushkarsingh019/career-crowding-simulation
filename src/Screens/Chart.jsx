@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { socketInUse } from "../config/config";
 import { Bar } from "react-chartjs-2"
-import Navbar from "../components/Navbar"
-import HeroText from "../components/HeroText";
 
 import {getCareerLabels} from "../lib/careerChoices"
 
@@ -77,8 +75,6 @@ function ChartScreen({onFetch, currentChart, roundState}){
 
     return(
         <div className="screen chart-screen">
-            <Navbar />
-            <HeroText heroText={`Chart Screen`} />
             <br />
             {chartData ? chartData.map((chart) => {
                 return(
