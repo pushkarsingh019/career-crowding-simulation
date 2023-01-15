@@ -6,7 +6,6 @@ function Navbar({isAdmin, roundNumber}){
         <div className="navbar">
             <nav className="nav-list">
                 <li><Link className="link" to={`/choice`}>Home</Link></li>
-                <li><Link className="link" to={`/chart`}>Charts</Link></li>
                 <li><Link className="link" to={`/simulation`}>Simulation</Link></li>
             </nav>
         </div>
