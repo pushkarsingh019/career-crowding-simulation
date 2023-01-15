@@ -80,14 +80,20 @@ function ChartScreen({onFetch, currentChart, roundState}){
         <div className="screen chart-screen">
             <HeroText heroText={`measure how your career performed`} />
             <br />
-            {chartData ? chartData.map((chart) => {
-                return(
-                    <button className={chosen === chart._id ? "btn options margin-right chosen-button" : "btn options margin-right"} onClick={() => {clickHandler(chart.round); setChosen(chart._id)}} key={chart._id}>Round {chart.round}</button>
-                )
-            }) : <code>chart data does not exist</code> }
-            <br />
-            <br />
-            {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
+            <div className="chart-screen-flex">
+                <div>
+                    {chartData ? chartData.map((chart) => {
+                        return(
+                            <button className={chosen === chart._id ? "btn options margin-right chosen-button" : "btn options margin-right"} onClick={() => {clickHandler(chart.round); setChosen(chart._id)}} key={chart._id}>Round {chart.round}</button>
+                        )
+                    }) : <code>chart data does not exist</code> }
+                </div>
+                <br />
+                <br />
+                <div className="chart-canvas">
+                    {currentChart ? <Bar className="bar-chart" options={options} data={data} /> : <h3> Which rounds chart to display</h3>}
+                </div>
+            </div>
         </div>
     )
         }

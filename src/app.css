@@ -255,9 +255,15 @@ button .disabled {
 
 
 /* chart page */
-canvas {
-    width: 50%;
+.chart-canvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    padding-bottom: 200px;
+    padding-top: 0px;
 }
+
 
 /* choice card */
 .choice-card {

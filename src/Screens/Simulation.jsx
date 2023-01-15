@@ -49,8 +49,6 @@ function Simulation({choiceHandler, userData, careerData, currentChoice, roundSt
                 </div> 
                 :
                 <div>
-                    <br />
-                    <br />
                     {roundState ? 
                         <div>
                             <br />
