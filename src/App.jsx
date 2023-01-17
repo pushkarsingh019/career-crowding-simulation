@@ -24,7 +24,6 @@ import { socketInUse } from "./config/config";
 function App(){
 
   // setting up socket.io-client
-  const socket = io.connect(socketInUse, {transports : ['websocket']});
   const [userData, setUserData] = useState({});
   const [careerData, setCareerData] = useState({});
   const [currentChoice, setCurrentChoice] = useState();
@@ -33,6 +32,8 @@ function App(){
   const [choicesData, setChoicesData] = useState();
   const [roundState, setRoundState] = useState();
   const [isAdmin, setIsAdmin] = useState(false)
+  const customId = userData.room;
+  const socket = io.connect(socketInUse, {transports : ['websocket'], query : "clientId="+customId});
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
