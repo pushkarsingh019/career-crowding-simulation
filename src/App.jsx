@@ -15,6 +15,10 @@ import DebreifScreen from "./Screens/DebreifScreen";
 import ChooseScreen from "./Screens/onboarding/ChooseScreen";
 import GameExplantion from "./Screens/onboarding/GameExplanation";
 
+// importing notifications library
+import {toast,ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // importing config requirements
 // eslint-disable-next-line
 import { useState } from "react";
@@ -31,9 +35,10 @@ function App(){
   const [currentChart, setCurrentChart] = useState();
   const [choicesData, setChoicesData] = useState();
   const [roundState, setRoundState] = useState();
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
   const customId = userData.room;
   const socket = io.connect(socketInUse, {transports : ['websocket'], query : "clientId="+customId});
+  let errorLogged = false;
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -58,10 +63,34 @@ function App(){
 
   socket.on("connect", () => {
     console.log("client connected");
+    errorLogged = false;
   })
 
-  // reducers
+  socket.on("connect_error", (error) => {
+    if(!errorLogged){
+      showError()
+      console.log(error)
+      errorLogged = true
+    }
+    socket.off("connect_error");
+  })
 
+
+  // notification function
+ function showError(){
+  toast.error('Failed to connect, refresh your page!', {
+    position: "top-center",
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    });
+ }
+
+  // reducers
 
   function handleUserData(data){
     setUserData(data)
@@ -121,6 +150,7 @@ function App(){
 
   return(
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<ChooseScreen />} />  
         <Route path="/game" element={<LandingPage storeData={handleUserData} />} />
