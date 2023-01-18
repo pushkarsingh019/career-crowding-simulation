@@ -116,7 +116,7 @@ function App(){
   function handleChoiceChange(userChoice){
     // current choice is a value from 1 to 4.
     let dataToSend = handleNewChoice(userChoice);
-    socket.emit("choiceChange", dataToSend);
+    socket.emit("choiceChange", dataToSend, userData.room);
   };
 
   async function submitChoiceHandler(){

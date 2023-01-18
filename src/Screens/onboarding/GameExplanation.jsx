@@ -30,7 +30,7 @@ function GameExplantion({storeData}){
                 password : password
             };
 
-            await axios.post(`${socketInUse}auth`, adminCredentials)
+            await axios.post(`${socketInUse}create-game`, adminCredentials)
         };
 
 
