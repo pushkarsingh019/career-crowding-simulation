@@ -36,6 +36,7 @@ function App() {
   const [roundState, setRoundState] = useState();
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminData, setAdminData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const customId = userData.room;
   const socket = io.connect(socketInUse, {
     transports: ["websocket"],
@@ -121,11 +122,23 @@ function App() {
   }
 
   async function submitChoiceHandler() {
-    await axios.get(`${socketInUse}end-round/${adminData.roomName}`);
+    setIsLoading(true);
+    try {
+      await axios.get(`${socketInUse}end-round/${adminData.roomName}`);
+      setIsLoading(false);
+    } catch (error) {
+      showError();
+    }
   }
 
   async function startRoundHandler() {
-    await axios.get(`${socketInUse}start/${adminData.roomName}`);
+    setIsLoading(true);
+    try {
+      await axios.get(`${socketInUse}start/${adminData.roomName}`);
+      setIsLoading(false);
+    } catch {
+      showError();
+    }
   }
 
   async function clearDatabaseHandler(shouldDelete) {
@@ -206,6 +219,7 @@ function App() {
               isAdmin={isAdmin}
               onLogin={adminAuth}
               adminData={adminData}
+              isLoading={isLoading}
             />
           }
         />

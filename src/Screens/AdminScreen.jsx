@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import HeroText from "../components/HeroText";
 import Login from "./Login";
@@ -20,7 +20,9 @@ function AdminScreen({
   isAdmin,
   onLogin,
   adminData,
+  isLoading,
 }) {
+  const [loadingMessage, setLoadingMessage] = useState("");
   const navigate = useNavigate();
   function notify() {
     toast("Close the round", {
@@ -37,6 +39,7 @@ function AdminScreen({
   }
 
   function startHandler() {
+    setLoadingMessage(`starting round ${roundNumber + 1}...`);
     onStart();
     setTimeout(function () {
       notify();
@@ -44,6 +47,7 @@ function AdminScreen({
   }
 
   function clickHandler() {
+    setLoadingMessage(`ending round  ${roundNumber}...`);
     onSubmit();
   }
 
@@ -60,14 +64,17 @@ function AdminScreen({
       <br />
       {isAdmin ? (
         <div className="admin-hero">
-          <code>{`${adminData.roomName}`}</code>
-          <p>
-            {roundState
-              ? `Round ${roundNumber} is running`
-              : roundNumber === 0
-              ? "Start The Round"
-              : `Round ${roundNumber} has ended`}
-          </p>
+          <div className="round-status">
+            {isLoading ? (
+              <i>{loadingMessage}</i>
+            ) : roundState ? (
+              `Round ${roundNumber} is in progress`
+            ) : roundNumber === 0 ? (
+              "Start the Game"
+            ) : (
+              `Round ${roundNumber} has ended`
+            )}
+          </div>
           <br />
           {roundState ? (
             <button className=" btn  end-button" onClick={clickHandler}>
