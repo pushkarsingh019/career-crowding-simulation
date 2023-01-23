@@ -20,7 +20,7 @@ strong {
 :root {
     --primary-color : #06283D;
     --light-color : #ccfbf1;
-    --dark-text-color : #222222;
+    --dark-text-color : #111827;
     --blue-color : #2146C7;
     --light-blue : #ecfeff;
 }
@@ -178,7 +178,7 @@ strong {
 /* simulation screen */
 .choices {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .user-details {
@@ -224,19 +224,20 @@ strong {
 .career-card button {
     background-color: var(--dark-text-color);
     color: white;
-    border: none;
-    padding: 8px 10px;
+    border: 1px solid var(--dark-text-color);
+    padding: 8px;
     border-radius: 12px;
     width: 75%;
 }
 
-button .disabled {
-    color: green;
+.career-card button:hover{
+    background-color: var(--dark-text-color);
+    color: white;
 }
 
-.career-card button:hover{
-    background-color: var(--blue-color);
-    color: var(--light-color);
+.chosen-btn {
+    background-color: var(--dark-text-color);
+    color: gold;
 }
 
 
