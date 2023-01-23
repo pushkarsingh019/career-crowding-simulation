@@ -37,6 +37,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminData, setAdminData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isChart, setIsChart] = useState(false);
   const customId = userData.room;
   const socket = io.connect(socketInUse, {
     transports: ["websocket"],
@@ -148,10 +149,17 @@ function App() {
   }
 
   async function fetchChartHandler(roundNumber) {
-    let { data } = await axios.get(
-      `${socketInUse}chart/${userData.room}/${roundNumber}`
-    );
-    setCurrentChart(data);
+    setIsChart(true);
+    try {
+      let { data } = await axios.get(
+        `${socketInUse}chart/${userData.room}/${roundNumber}`
+      );
+      setCurrentChart(data);
+      setIsChart(false);
+    } catch (error) {
+      setIsChart(false);
+      console.log(error);
+    }
   }
 
   async function adminAuth(credentials) {
@@ -204,6 +212,7 @@ function App() {
               currentChart={currentChart}
               choicesData={choicesData}
               roundNumber={roundNumber}
+              isChart={isChart}
             />
           }
         />
