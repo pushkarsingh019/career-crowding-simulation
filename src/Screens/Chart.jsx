@@ -14,7 +14,8 @@ import {
   Legend,
 } from "chart.js";
 
-function ChartScreen({ onFetch, currentChart, roundNumber }) {
+function ChartScreen({ onFetch, currentChart, roundNumber, isChart }) {
+  console.log(isChart);
   const [round, setRound] = useState();
   const [chosen, setChosen] = useState();
 
@@ -92,10 +93,12 @@ function ChartScreen({ onFetch, currentChart, roundNumber }) {
         <br />
         <br />
         <div className="chart-canvas">
-          {currentChart ? (
+          {isChart ? (
+            "making the chart"
+          ) : currentChart ? (
             <Bar className="bar-chart" options={options} data={data} />
           ) : (
-            <h3> Which rounds chart to display</h3>
+            <h3>Which rounds chart to display</h3>
           )}
         </div>
       </div>
