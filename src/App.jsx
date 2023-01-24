@@ -18,6 +18,7 @@ import GameExplantion from "./Screens/onboarding/GameExplanation";
 // importing notifications library
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Flip } from "react-toastify";
 
 // importing config requirements
 // eslint-disable-next-line
@@ -59,6 +60,12 @@ function App() {
   }, [socket]);
 
   useEffect(() => {
+    socket.on("newPlayer", (data) => {
+      showInfo(data.playerName);
+    });
+  }, [socket]);
+
+  useEffect(() => {
     async function getChartData() {
       let { data } = await axios.get(`${socketInUse}`);
       setChoicesData(data.data);
@@ -94,11 +101,24 @@ function App() {
     });
   }
 
+  function showInfo(playerName) {
+    toast.success(`${playerName} just joined!`, {
+      position: "top-center",
+      autoClose: 1500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  }
+
   // reducers
 
-  function handleUserData(data) {
+  async function handleUserData(data) {
     setUserData(data);
-    console.log(userData);
+    await axios.get(`${socketInUse}join/${data.room}/${data.username}`);
   }
 
   function handleNewChoice(userChoice) {
@@ -176,7 +196,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ToastContainer />
+      <ToastContainer transition={Flip} />
       <Routes>
         <Route path="/" element={<ChooseScreen />} />
         <Route
