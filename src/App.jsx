@@ -52,10 +52,6 @@ function App() {
     socket.on("newChoice", (data) => {
       setCareerData(data);
     });
-
-    return () => {
-      socket.off("newChoice");
-    };
   }, [socket]);
 
   useEffect(() => {
@@ -88,7 +84,7 @@ function App() {
 
   useEffect(() => {
     socket.on("connect", () => {
-      console.log("client connected");
+      console.log(socket.id);
     });
 
     return () => {
