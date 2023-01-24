@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import io from "socket.io-client";
 import { useEffect } from "react";
 import axios from "axios";
+import React from "react";
 
 // importing screens
 import LandingPage from "./Screens/LandingPage";
@@ -44,12 +45,17 @@ function App() {
     transports: ["websocket"],
     query: "clientId=" + customId,
   });
-  let errorLogged = false;
+
+  const toastId = React.useRef(null);
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
       setCareerData(data);
     });
+
+    return () => {
+      socket.off("newChoice");
+    };
   }, [socket]);
 
   useEffect(() => {
@@ -57,12 +63,19 @@ function App() {
       setRoundState(roundData.status);
       setRoundNumber(roundData.number);
     });
+    // return () => {
+    //   socket.off("roundStatus");
+    // };
   }, [socket]);
 
   useEffect(() => {
     socket.on("newPlayer", (data) => {
       showInfo(data.playerName);
     });
+
+    return () => {
+      socket.off("newPlayer");
+    };
   }, [socket]);
 
   useEffect(() => {
@@ -73,45 +86,60 @@ function App() {
     getChartData();
   }, []);
 
-  socket.on("connect", () => {
-    console.log("client connected");
-    errorLogged = false;
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("client connected");
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    socket.once("connect_error", (error) => {
+      showError();
+      console.info(error.message);
+    });
+
+    return () => {
+      socket.off("connect_error");
+    };
   });
 
-  socket.on("connect_error", (error) => {
-    if (!errorLogged) {
-      showError();
-      console.log(error);
-      errorLogged = true;
-    }
-    socket.off("connect_error");
-  });
+  // socket.on("connect_error", (error) => {
+  //   showError();
+  // });
 
   // notification function
   function showError() {
-    toast.error("Failed to connect, refresh your page!", {
-      position: "top-center",
-      autoClose: false,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    if (!toast.isActive(toastId.current)) {
+      toastId.current = toast.error("Failed to connect, refresh your page!", {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   }
 
   function showInfo(playerName) {
-    toast.success(`${playerName} just joined!`, {
-      position: "top-center",
-      autoClose: 1500,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
+    if (!toast.isActive(toastId.current)) {
+      toastId.current = toast.success(`${playerName} just joined the room!`, {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   }
 
   // reducers
