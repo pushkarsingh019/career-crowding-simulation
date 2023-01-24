@@ -52,10 +52,6 @@ function App() {
     socket.on("newChoice", (data) => {
       setCareerData(data);
     });
-
-    return () => {
-      socket.off("newChoice");
-    };
   }, [socket]);
 
   useEffect(() => {
