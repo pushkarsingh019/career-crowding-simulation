@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // importing timer config variables
-import { stopTimer } from "../config/config";
+import { originInUse, stopTimer } from "../config/config";
 
 function AdminScreen({
   onSubmit,
@@ -25,7 +25,7 @@ function AdminScreen({
   const [loadingMessage, setLoadingMessage] = useState("");
   const navigate = useNavigate();
   function notify() {
-    toast("Close the round", {
+    toast.warning("Close the round", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -35,6 +35,19 @@ function AdminScreen({
       progress: undefined,
       theme: "light",
       type: "warning",
+    });
+  }
+
+  function notifyClipboard() {
+    toast.info("copied to clipboard!", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
     });
   }
 
@@ -54,6 +67,17 @@ function AdminScreen({
   async function deleteHandler() {
     await onDelete(true);
     navigate(`/end`);
+  }
+
+  async function copyToClipboard() {
+    const link = `${originInUse}explanation/player/${adminData.roomName}`;
+    console.log(link);
+    try {
+      navigator.clipboard.writeText(link);
+      notifyClipboard();
+    } catch (error) {
+      console.log("copy to clipboard failed");
+    }
   }
 
   return (
@@ -90,6 +114,12 @@ function AdminScreen({
             onClick={deleteHandler}
           >
             End Simulation
+          </button>
+          <button
+            className="btn primary-button margin-left"
+            onClick={copyToClipboard}
+          >
+            Share Game Link
           </button>
         </div>
       ) : (
