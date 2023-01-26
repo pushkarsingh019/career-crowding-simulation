@@ -47,8 +47,6 @@ function App() {
     query: "clientId=" + customId,
   });
 
-  const toastId = React.useRef(null);
-
   useEffect(() => {
     socket.on("newChoice", (data) => {
       setCareerData(data);
@@ -114,33 +112,29 @@ function App() {
 
   // notification function
   function showError() {
-    if (!toast.isActive(toastId.current)) {
-      toastId.current = toast.error("Failed to connect, refresh your page!", {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    toast.error("Failed to connect, refresh your page!", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   function showInfo(playerName) {
-    if (!toast.isActive(toastId.current)) {
-      toastId.current = toast.success(`${playerName} just joined the room!`, {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    toast.success(`${playerName} just joined the room!`, {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   // reducers
