@@ -253,6 +253,10 @@ strong {
     padding: 100px 20px;
 }
 
+.screen .admin-hero .admin-options-flex {
+    display: flex;
+    justify-content: center;
+}
 
 
 /* chart page */
