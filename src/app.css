@@ -253,6 +253,10 @@ strong {
     padding: 100px 20px;
 }
 
+.screen .admin-hero .admin-options-flex {
+    display: flex;
+    justify-content: center;
+}
 
 
 /* chart page */
@@ -286,18 +290,23 @@ strong {
 
 /* game explanation section */
 
-.explanation {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 5rem;
+.instructions {
     text-align: left;
-    padding: 10px 30px;
+    padding: 2rem 10rem;
+};
+
+.instructions a{
+    text-decoration: none;
+    color: #1d4ed8;
 }
 
-.explanation iframe {
+.explanation-iframe {
     border-radius: 12px;
-    width: 600px;
-}
+    width: 10rem;
+    height: 10rem
+};
+
+
 
 .create-room-btn {
     margin-left: 3rem;
@@ -312,3 +321,29 @@ strong {
     text-decoration: none;
     color: #1d4ed8;
 };
+
+/* debrief */
+.explanation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5rem;
+    text-align: left;
+    padding: 10px 30px;
+}
+
+.explanation iframe {
+    border-radius: 12px;
+    width: 600px;
+}
+
+
+/* flex */
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.feedback-link {
+    padding: 10px 30px;
+    text-align: center;
+}

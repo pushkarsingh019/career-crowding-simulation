@@ -23,10 +23,16 @@ function Simulation({
   onFetch,
   currentChart,
   choicesData,
+  end,
+  isAdmin,
 }) {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(seconds);
   const [choices, setChoices] = useState();
+
+  if (end === true) {
+    navigate("/end");
+  }
 
   useEffect(() => {
     const timer =
@@ -49,7 +55,7 @@ function Simulation({
 
   return (
     <section className="screen">
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       {Object.keys(userData).length === 0 ? (
         <div>
           <br />

@@ -15,7 +15,6 @@ import {
 } from "chart.js";
 
 function ChartScreen({ onFetch, currentChart, roundNumber, isChart }) {
-  console.log(isChart);
   const [round, setRound] = useState();
   const [chosen, setChosen] = useState();
 

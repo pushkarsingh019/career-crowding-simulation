@@ -14,7 +14,7 @@ import DebreifScreen from "./Screens/DebreifScreen";
 
 // importing onboarding screens
 import ChooseScreen from "./Screens/onboarding/ChooseScreen";
-import GameExplantion from "./Screens/onboarding/GameExplanation";
+import Explanation from "./Screens/onboarding/GameExplanation";
 
 // importing notifications library
 import { toast, ToastContainer } from "react-toastify";
@@ -40,13 +40,12 @@ function App() {
   const [adminData, setAdminData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isChart, setIsChart] = useState(false);
+  const [end, setEnd] = useState(false);
   const customId = userData.room;
   const socket = io.connect(socketInUse, {
     transports: ["websocket"],
     query: "clientId=" + customId,
   });
-
-  const toastId = React.useRef(null);
 
   useEffect(() => {
     socket.on("newChoice", (data) => {
@@ -67,6 +66,10 @@ function App() {
   useEffect(() => {
     socket.on("newPlayer", (data) => {
       showInfo(data.playerName);
+    });
+
+    socket.on("end", (data) => {
+      setEnd(data.end);
     });
 
     return () => {
@@ -109,33 +112,29 @@ function App() {
 
   // notification function
   function showError() {
-    if (!toast.isActive(toastId.current)) {
-      toastId.current = toast.error("Failed to connect, refresh your page!", {
-        position: "top-center",
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    toast.error("Failed to connect, refresh your page!", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   function showInfo(playerName) {
-    if (!toast.isActive(toastId.current)) {
-      toastId.current = toast.success(`${playerName} just joined the room!`, {
-        position: "top-center",
-        autoClose: 1000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
+    toast.success(`${playerName} just joined the room!`, {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   // reducers
@@ -245,6 +244,8 @@ function App() {
               onFetch={fetchChartHandler}
               currentChart={currentChart}
               choicesData={choicesData}
+              end={end}
+              isAdmin={isAdmin}
             />
           }
         />
@@ -280,11 +281,11 @@ function App() {
         <Route path="/explanation" element={<ChooseScreen />} />
         <Route
           path="/explanation/:role"
-          element={<GameExplantion storeData={handleUserData} />}
+          element={<Explanation storeData={handleUserData} />}
         />
         <Route
           path="/explanation/player/:roomName"
-          element={<GameExplantion storeData={handleUserData} />}
+          element={<Explanation storeData={handleUserData} />}
         />
         <Route path="/end" element={<DebreifScreen />} />
         <Route path="*" element={<ErrorPage />} />

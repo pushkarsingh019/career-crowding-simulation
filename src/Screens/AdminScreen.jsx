@@ -83,7 +83,7 @@ function AdminScreen({
   return (
     <div className="screen">
       <ToastContainer />
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       <HeroText heroText={`The Admin Screen`} />
       <br />
       {isAdmin ? (
@@ -100,27 +100,38 @@ function AdminScreen({
             )}
           </div>
           <br />
-          {roundState ? (
-            <button className=" btn  end-button" onClick={clickHandler}>
-              End Round {roundNumber}
+          <div className="admin-options-flex">
+            {roundState ? (
+              <button className=" btn  end-button" onClick={clickHandler}>
+                End Round {roundNumber}
+              </button>
+            ) : (
+              <div>
+                <button
+                  className=" btn start-button margin-left"
+                  onClick={startHandler}
+                >
+                  Start Round {roundNumber + 1}
+                </button>
+                {roundNumber !== 0 ? (
+                  <button
+                    className="secondary-button btn margin-left"
+                    onClick={deleteHandler}
+                  >
+                    End Simulation
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            )}
+            <button
+              className="btn primary-button margin-left"
+              onClick={copyToClipboard}
+            >
+              Share Game Link
             </button>
-          ) : (
-            <button className=" btn start-button" onClick={startHandler}>
-              Start Round {roundNumber + 1}
-            </button>
-          )}
-          <button
-            className="secondary-button btn margin-left"
-            onClick={deleteHandler}
-          >
-            End Simulation
-          </button>
-          <button
-            className="btn primary-button margin-left"
-            onClick={copyToClipboard}
-          >
-            Share Game Link
-          </button>
+          </div>
         </div>
       ) : (
         <Login onLogin={onLogin} />
