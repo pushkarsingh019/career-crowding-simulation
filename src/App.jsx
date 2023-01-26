@@ -40,6 +40,7 @@ function App() {
   const [adminData, setAdminData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isChart, setIsChart] = useState(false);
+  const [end, setEnd] = useState(false);
   const customId = userData.room;
   const socket = io.connect(socketInUse, {
     transports: ["websocket"],
@@ -67,6 +68,10 @@ function App() {
   useEffect(() => {
     socket.on("newPlayer", (data) => {
       showInfo(data.playerName);
+    });
+
+    socket.on("end", (data) => {
+      setEnd(data.end);
     });
 
     return () => {
@@ -245,6 +250,7 @@ function App() {
               onFetch={fetchChartHandler}
               currentChart={currentChart}
               choicesData={choicesData}
+              end={end}
             />
           }
         />

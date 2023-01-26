@@ -23,10 +23,16 @@ function Simulation({
   onFetch,
   currentChart,
   choicesData,
+  end,
 }) {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(seconds);
   const [choices, setChoices] = useState();
+
+  console.log("has the simulation ended ? " + end);
+  if (end === true) {
+    navigate("/end");
+  }
 
   useEffect(() => {
     const timer =
