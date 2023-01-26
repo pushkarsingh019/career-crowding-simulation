@@ -83,7 +83,7 @@ function AdminScreen({
   return (
     <div className="screen">
       <ToastContainer />
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       <HeroText heroText={`The Admin Screen`} />
       <br />
       {isAdmin ? (

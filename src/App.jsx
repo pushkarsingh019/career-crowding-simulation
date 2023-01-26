@@ -251,6 +251,7 @@ function App() {
               currentChart={currentChart}
               choicesData={choicesData}
               end={end}
+              isAdmin={isAdmin}
             />
           }
         />

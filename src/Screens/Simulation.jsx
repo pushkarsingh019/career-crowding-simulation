@@ -24,6 +24,7 @@ function Simulation({
   currentChart,
   choicesData,
   end,
+  isAdmin,
 }) {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(seconds);
@@ -55,7 +56,7 @@ function Simulation({
 
   return (
     <section className="screen">
-      <Navbar />
+      <Navbar isAdmin={isAdmin} />
       {Object.keys(userData).length === 0 ? (
         <div>
           <br />
