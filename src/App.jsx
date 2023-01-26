@@ -14,7 +14,7 @@ import DebreifScreen from "./Screens/DebreifScreen";
 
 // importing onboarding screens
 import ChooseScreen from "./Screens/onboarding/ChooseScreen";
-import GameExplantion from "./Screens/onboarding/GameExplanation";
+import Explanation from "./Screens/onboarding/GameExplanation";
 
 // importing notifications library
 import { toast, ToastContainer } from "react-toastify";
@@ -281,11 +281,11 @@ function App() {
         <Route path="/explanation" element={<ChooseScreen />} />
         <Route
           path="/explanation/:role"
-          element={<GameExplantion storeData={handleUserData} />}
+          element={<Explanation storeData={handleUserData} />}
         />
         <Route
           path="/explanation/player/:roomName"
-          element={<GameExplantion storeData={handleUserData} />}
+          element={<Explanation storeData={handleUserData} />}
         />
         <Route path="/end" element={<DebreifScreen />} />
         <Route path="*" element={<ErrorPage />} />

@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar({ isAdmin }) {
-  console.log(isAdmin);
   return (
     <div className="navbar">
       <nav className="nav-list">

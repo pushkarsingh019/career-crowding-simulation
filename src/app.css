@@ -290,18 +290,18 @@ strong {
 
 /* game explanation section */
 
-.explanation {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 5rem;
+.instructions {
     text-align: left;
-    padding: 10px 30px;
-}
+    padding: 2rem 10rem;
+};
 
-.explanation iframe {
+.explanation-iframe {
     border-radius: 12px;
-    width: 600px;
-}
+    width: 10rem;
+    height: 10rem
+};
+
+
 
 .create-room-btn {
     margin-left: 3rem;
