@@ -1,0 +1,1 @@
+this posts explains how prestige and imitation shape your career.
