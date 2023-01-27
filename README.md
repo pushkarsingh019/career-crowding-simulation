@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Career Crowding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time simulation which uses the idea of [mimetic theory](https://mimetictheory.com/what-it-is-2/) to explain how prestige and imitation influence our career choices.
 
-## Available Scripts
+## Playing the Game
 
-In the project directory, you can run:
+To play this game, you can head to [simulation.stoicpushkar.com](https://simulation.stoicpushkar.com/) and either conduct the game or play it.
 
-### `npm start`
+While this game is primarily made for careers, you can also customise it based on your domain. For more information, read [How to customise the simulation](/docs/how-to-customise.md).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack and Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This app is bundled together with create-react-app with the nodejs backend. I have also used technologoes like [socketio](https://socket.io/) to make the app real-time.
 
-### `npm test`
+Here's how to run this app on your local system in three steps.
+- Clone the frontend and the backend.
+- install the dependencies.
+- run npm start.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Clone the repositories
+`git clone https://github.com/pushkarsingh019/simulation-frontend.git` and `git clone https://github.com/pushkarsingh019/simulation-backend.git`
 
-### `npm run build`
+#### Install the dependencies
+On both the folders, run `npm install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### run start command
+For the client folder, run `npm start` and for the backend folder `node app.js`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+In this simulation, you can wither conduct the game or play it. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Conductors can create a new room, share the room link, start and stop a round and also end the simulation. 
+The Players will recieve the game link after which they can play the game real-time with other players in the room. After each round they can check the stats on their last performance and optimise to win the game.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Please Enjoy,
+~ Pushkar Singh
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
